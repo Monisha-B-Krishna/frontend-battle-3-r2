@@ -1,0 +1,167 @@
+/* ============================================================
+   OVERMIND — Animations
+   Terminal boot, signal pulse, phosphor glow
+   All animations: transform/opacity only for GPU compositing
+   ============================================================ */
+
+/* ── Signal bar pulse ── */
+@keyframes signal-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── Dot pulse ── */
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.3; transform: scale(0.6); }
+}
+
+/* ── Cursor blink ── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Fade in ── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Buffer pulse ── */
+@keyframes buffer-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.buffer-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--amber);
+  animation: buffer-pulse 0.7s ease infinite;
+}
+
+/* ── LOADING / BOOT SCREEN ── */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-0);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10vh 12vw;
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+  font-family: var(--font-terminal);
+}
+
+#loading-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Scanline on loading screen too */
+#loading-screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.1) 2px,
+    rgba(0,0,0,0.1) 4px
+  );
+  pointer-events: none;
+}
+
+.boot-brand {
+  font-size: clamp(24px, 4vw, 40px);
+  color: var(--phosphor);
+  letter-spacing: 0.3em;
+  text-shadow: var(--glow-phosphor);
+  margin-bottom: var(--sp-1);
+  animation: fade-in 0.3s ease;
+}
+
+.boot-tagline {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  margin-bottom: var(--sp-8);
+  text-transform: uppercase;
+}
+
+.boot-log {
+  width: 100%;
+  max-width: 600px;
+}
+
+.boot-line {
+  font-size: var(--text-sm);
+  letter-spacing: 0.06em;
+  line-height: 2;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.boot-line.visible { opacity: 1; }
+
+.boot-line .prefix { color: var(--phosphor-muted); margin-right: var(--sp-2); }
+.boot-line .ok     { color: var(--phosphor); }
+.boot-line .warn   { color: var(--amber); }
+.boot-line .err    { color: var(--alert); }
+.boot-line .info   { color: var(--text-muted); }
+.boot-line .val    { color: var(--text-primary); }
+
+.boot-progress-wrap {
+  margin-top: var(--sp-6);
+  width: 100%;
+  max-width: 600px;
+}
+
+.boot-progress-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  margin-bottom: var(--sp-1);
+  display: flex;
+  justify-content: space-between;
+}
+
+.boot-progress-track {
+  height: 2px;
+  background: var(--bg-3);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.boot-progress-bar {
+  height: 100%;
+  background: var(--phosphor);
+  border-radius: 1px;
+  width: 0%;
+  transition: width 0.2s ease;
+  box-shadow: var(--glow-phosphor);
+}
+
+.boot-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: var(--phosphor);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+  box-shadow: var(--glow-phosphor);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
