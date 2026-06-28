@@ -77,10 +77,13 @@
   <header id="topbar">
     <div class="topbar-left">
 
+      <!-- Sidebar Toggle -->
+      <button id="btn-sidebar-toggle" title="Toggle sidebar">☰</button>
+
       <!-- Brand -->
       <div class="brand">
         <span class="brand-prefix" style="color:var(--phosphor);font-size:20px;text-shadow:var(--glow-phosphor);">⬡</span>
-        <span class="brand-name">OVERMIND</span>
+        <span class="brand-name" style="font-size:24px;letter-spacing:0.25em;">OVERMIND</span>
       </div>
 
       <span class="topbar-sep">|</span>
@@ -132,6 +135,9 @@
         <span>BUFFERED:</span>
         <span id="buffer-count-top">0</span>
       </div>
+
+      <!-- Theme Toggle -->
+      <button id="btn-theme-toggle" title="Switch to light mode">☀</button>
 
       <!-- Freeze/Resume -->
       <button id="btn-pause">
@@ -434,6 +440,7 @@
 <script src="./js/layout.js"></script>
 <script src="./js/controls.js"></script>
 <script src="./js/export.js"></script>
+<script src="./js/theme.js"></script>
 
 <!-- OVERMIND Boot Sequence -->
 <script>
@@ -475,6 +482,7 @@
     Search.init();
     Stream.init();
     Export.init();
+    Theme.init();
 
     setTimeout(() => {
       screen.classList.add('fade-out');
@@ -486,5 +494,6 @@
 })();
 </script>
 
+<div id="sidebar-overlay"></div>
 </body>
 </html>

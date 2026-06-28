@@ -60,8 +60,8 @@
   /* ── Text — CRT phosphor tinted ── */
   --text-primary:   #D9F99D;
   --text-secondary: #86EFAC;
---text-muted:     #4B7A4A;
---text-dim:       #3A5C3A;
+  --text-muted:     #4B5320;
+  --text-dim:       #2D3A18;
   --text-ghost:     #1A220E;
 
   /* ── Alert — ANOMALY only ── */
@@ -83,8 +83,8 @@
 
   /* ── Type Scale ── */
   --text-xs:   10px;
-  --text-sm:   13px;
-  --text-base: 14px;
+  --text-sm:   12px;
+  --text-base: 13px;
   --text-md:   14px;
   --text-lg:   16px;
   --text-xl:   20px;
@@ -105,7 +105,7 @@
   --kpi-h:     88px;
   --toolbar-h: 44px;
   --sidebar-w: 224px;
-  --row-h:     32px;
+  --row-h:     28px;
   --header-h:  40px;
   --radius:    3px;
 
@@ -169,3 +169,58 @@ body::after {
 /* ── Utilities ── */
 .mono     { font-family: var(--font-data); }
 .terminal { font-family: var(--font-terminal); }
+
+/* ══ LIGHT MODE TOKENS ══ */
+body.light-mode {
+  --bg-0:       #F0F4F0;
+  --bg-1:       #E4EDE4;
+  --bg-2:       #D4E4D4;
+  --bg-3:       #B8CCB8;
+  --bg-4:       #9AB89A;
+  --bg-5:       #7AA47A;
+
+  --phosphor:        #1A7A1A;
+  --phosphor-dim:    #2A6A2A;
+  --phosphor-mid:    #3A8A3A;
+  --phosphor-muted:  #4A9A4A;
+  --phosphor-ghost:  rgba(26,122,26,0.1);
+
+  --electric:        #0066AA;
+  --electric-dim:    #0077BB;
+  --electric-muted:  #5599BB;
+  --electric-ghost:  rgba(0,102,170,0.1);
+
+  --gold:            #AA7700;
+  --gold-dim:        #BB8800;
+  --gold-mid:        #CC9900;
+  --gold-ghost:      rgba(170,119,0,0.1);
+
+  --amber:       #CC7700;
+  --amber-dim:   #AA5500;
+  --amber-ghost: rgba(204,119,0,0.1);
+
+  --alert:       #CC2222;
+  --alert-dim:   #AA1111;
+  --alert-bg:    rgba(204,34,34,0.08);
+
+  --text-primary:   #1A2A1A;
+  --text-secondary: #2A4A2A;
+  --text-muted:     #5A7A5A;
+  --text-dim:       #8AAA8A;
+
+  --glow-phosphor:  none;
+  --glow-electric:  none;
+  --glow-gold:      none;
+  --glow-amber:     none;
+  --glow-alert:     none;
+
+  --border:          1px solid var(--bg-3);
+  --border-lit:      1px solid var(--phosphor-muted);
+  --border-electric: 1px solid var(--electric-muted);
+  --border-gold:     1px solid var(--gold-mid);
+  --border-amber:    1px solid var(--amber-dim);
+  --border-alert:    1px solid var(--alert-dim);
+}
+
+/* Remove scanlines in light mode */
+body.light-mode::after { display: none; }

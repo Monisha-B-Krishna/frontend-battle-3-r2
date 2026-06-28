@@ -89,8 +89,12 @@ const Grid = (() => {
     // Allocate fixed row node pool
     _allocateNodes();
 
-    // Scroll handler — debounced via rAF
+    // Scroll handler — sync header + debounced render
     _scrollEl.addEventListener('scroll', () => {
+      // Sync header horizontal scroll
+      const headerWrap = document.getElementById('grid-header-wrap');
+      if (headerWrap) headerWrap.scrollLeft = _scrollEl.scrollLeft;
+
       if (!_scrollRaf) {
         _scrollRaf = true;
         requestAnimationFrame(() => {
