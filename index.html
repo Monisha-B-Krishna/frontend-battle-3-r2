@@ -4,6 +4,8 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>OVERMIND — Global Robot Command Network</title>
+  <meta name="description" content="One Mind. Ten Thousand Machines. Real-time RPA telemetry command terminal."/>
+
   <link rel="stylesheet" href="./css/tokens.css"/>
   <link rel="stylesheet" href="./css/layout.css"/>
   <link rel="stylesheet" href="./css/components.css"/>
@@ -11,19 +13,476 @@
   <link rel="stylesheet" href="./css/animations.css"/>
 </head>
 <body>
-  <div id="app">
-    <p style="color:#39FF14;font-family:monospace;padding:20px;">
-      OVERMIND — Stream connecting...
-    </p>
+
+<!-- ═══════════════════════════════════════════════════
+     BOOT SEQUENCE LOADING SCREEN
+═══════════════════════════════════════════════════ -->
+<div id="loading-screen">
+  <div class="boot-brand">OVERMIND</div>
+  <div class="boot-tagline">Global Robot Command Network // v7.3.1-FIELD</div>
+
+  <div class="boot-log" id="boot-log">
+    <div class="boot-line" id="bl-0">
+      <span class="prefix">[SYS]</span>
+      <span class="info">Initializing command kernel...</span>
+    </div>
+    <div class="boot-line" id="bl-1">
+      <span class="prefix">[NET]</span>
+      <span class="info">Establishing uplink to telemetry matrix...</span>
+    </div>
+    <div class="boot-line" id="bl-2">
+      <span class="prefix">[DAT]</span>
+      <span class="info">Loading field unit database...</span>
+      <span class="ok">50,000 UNITS SYNCED</span>
+    </div>
+    <div class="boot-line" id="bl-3">
+      <span class="prefix">[SEC]</span>
+      <span class="info">Authenticating operator credentials...</span>
+      <span class="ok">GRANTED</span>
+    </div>
+    <div class="boot-line" id="bl-4">
+      <span class="prefix">[ENG]</span>
+      <span class="info">Mounting virtualized grid engine...</span>
+      <span class="ok">ONLINE</span>
+    </div>
+    <div class="boot-line" id="bl-5">
+      <span class="prefix">[STR]</span>
+      <span class="info">Opening telemetry firehose // 200ms tick rate...</span>
+      <span class="ok">CONNECTED</span>
+    </div>
+    <div class="boot-line" id="bl-6">
+      <span class="prefix">[CMD]</span>
+      <span class="ok">OVERMIND COMMAND LINK ESTABLISHED</span>
+      <span class="boot-cursor"></span>
+    </div>
   </div>
-  <script src="./dataStream.js"></script>
-  <script src="./js/format.js"></script>
-  <script src="./js/state.js"></script>
-  <script src="./js/stream.js"></script>
-  <script>
-    window.addEventListener('load', () => {
-      Stream.init();
-    });
-  </script>
+
+  <div class="boot-progress-wrap">
+    <div class="boot-progress-label">
+      <span>LOADING TELEMETRY MATRIX</span>
+      <span id="boot-pct">0%</span>
+    </div>
+    <div class="boot-progress-track">
+      <div class="boot-progress-bar" id="boot-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     APP SHELL — COMMAND CENTER
+═══════════════════════════════════════════════════ -->
+<div id="app">
+
+  <!-- ── TOPBAR ─────────────────────────────────── -->
+  <header id="topbar">
+    <div class="topbar-left">
+
+      <!-- Brand -->
+      <div class="brand">
+        <span class="brand-prefix">▓</span>
+        <span class="brand-name">OVERMIND</span>
+        <span class="brand-version">v7.3.1</span>
+      </div>
+
+      <span class="topbar-sep">|</span>
+
+      <!-- Signal Strength (replaces stream dot) -->
+      <div class="signal-wrap live" id="signal-wrap">
+        <span class="signal-label">SIG</span>
+        <div class="signal-bar"></div>
+        <div class="signal-bar"></div>
+        <div class="signal-bar"></div>
+        <div class="signal-bar"></div>
+        <div class="signal-bar"></div>
+        <span class="signal-status" id="signal-status">LIVE</span>
+      </div>
+
+      <span class="topbar-sep">|</span>
+
+      <!-- Tick counter -->
+      <div class="topbar-stat">
+        <span class="topbar-stat-label">Ticks Recv</span>
+        <span class="topbar-stat-value" id="stream-ticks">0</span>
+      </div>
+
+    </div>
+
+    <!-- Center -->
+    <div class="topbar-center">
+      <div class="topbar-stat">
+        <span class="topbar-stat-label">Tick Rate</span>
+        <span class="topbar-stat-value">200ms</span>
+      </div>
+      <span class="topbar-sep">|</span>
+      <div class="topbar-stat">
+        <span class="topbar-stat-label">Rows/Tick</span>
+        <span class="topbar-stat-value" id="stream-batch">—</span>
+      </div>
+      <span class="topbar-sep">|</span>
+      <div class="topbar-stat">
+        <span class="topbar-stat-label">Field Units</span>
+        <span class="topbar-stat-value">50,000</span>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+
+      <!-- Buffer alert (paused) -->
+      <div id="buffer-indicator">
+        <span class="buffer-dot"></span>
+        <span>BUFFERED:</span>
+        <span id="buffer-count-top">0</span>
+      </div>
+
+      <!-- Freeze/Resume -->
+      <button id="btn-pause">
+        <svg viewBox="0 0 16 16">
+          <rect x="3" y="2" width="4" height="12"/>
+          <rect x="9" y="2" width="4" height="12"/>
+        </svg>
+        FREEZE FEED
+      </button>
+
+      <!-- Clock -->
+      <span id="clock">--:--:--</span>
+    </div>
+  </header>
+
+  <!-- ── SIDEBAR ────────────────────────────────── -->
+  <aside id="sidebar">
+
+    <!-- SECTOR-01: Panel Control (Feature 6) -->
+    <div class="sidebar-sector">
+      <div class="sector-title">SECTOR-01 // WORKSPACE</div>
+
+      <div class="panel-toggle" id="toggle-kpi">
+        <span class="panel-toggle-label">
+          <span class="sector-icon">◈</span>
+          KPI Readout
+        </span>
+        <div class="toggle-switch on"></div>
+      </div>
+
+      <div class="panel-toggle" id="toggle-toolbar">
+        <span class="panel-toggle-label">
+          <span class="sector-icon">◈</span>
+          Command Bar
+        </span>
+        <div class="toggle-switch on"></div>
+      </div>
+
+      <div class="panel-toggle" id="toggle-grid">
+        <span class="panel-toggle-label">
+          <span class="sector-icon">◈</span>
+          Grid Node
+        </span>
+        <div class="toggle-switch on"></div>
+      </div>
+    </div>
+
+    <!-- SECTOR-02: Field Intel / Filters (Feature 7) -->
+    <div class="sidebar-sector">
+      <div class="sector-title">SECTOR-02 // FIELD INTEL</div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="filter-automation_type">// Automation Type</label>
+        <select class="filter-select" id="filter-automation_type">
+          <option value="">ALL TYPES</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="filter-department">// Department</label>
+        <select class="filter-select" id="filter-department">
+          <option value="">ALL DEPARTMENTS</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="filter-industry">// Industry</label>
+        <select class="filter-select" id="filter-industry">
+          <option value="">ALL INDUSTRIES</option>
+        </select>
+      </div>
+
+      <button class="btn-clear-filters" id="btn-clear-filters">
+        [CLEAR INTEL FILTERS]
+      </button>
+    </div>
+
+    <!-- SECTOR-03: Tactical Sort (Features 4+9) -->
+    <div class="sidebar-sector">
+      <div class="sector-title">SECTOR-03 // TACTICAL SORT</div>
+      <div class="sort-indicator" id="sort-indicator">
+        <span class="sort-none-text">// NO SORT ACTIVE<br>// SHIFT+CLICK = MULTI-SORT</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="sidebar-footer">
+      <div class="sidebar-footer-text">
+        OVERMIND COMMAND NETWORK<br/>
+        FRONTEND BATTLE 3.0 — R2<br/>
+        <span class="callsign">// OPERATOR: MONISHA-B-KRISHNA</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ───────────────────────────────────── -->
+  <main id="main">
+
+    <!-- KPI READOUT (Feature 1) -->
+    <div id="kpi-strip">
+
+      <div class="kpi-card kpi-rows">
+        <div class="kpi-card-icon">◎</div>
+        <div class="kpi-card-body">
+          <span class="kpi-label">// TELEMETRY ROWS PROCESSED</span>
+          <span class="kpi-value" id="kpi-rows">0</span>
+          <span class="kpi-sub">STREAMING // 200MS TICK</span>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-robots">
+        <div class="kpi-card-icon">⊕</div>
+        <div class="kpi-card-body">
+          <span class="kpi-label">// ACTIVE UNITS DEPLOYED</span>
+          <span class="kpi-value" id="kpi-robots">0</span>
+          <span class="kpi-sub">RUNNING TOTAL // FIELD ROBOTS</span>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-savings">
+        <div class="kpi-card-icon">$</div>
+        <div class="kpi-card-body">
+          <span class="kpi-label">// CUMULATIVE MISSION SAVINGS</span>
+          <span class="kpi-value" id="kpi-savings">$0</span>
+          <span class="kpi-sub">GLOBAL // ANNUAL USD</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COMMAND BAR (toolbar) -->
+    <div id="toolbar">
+      <div class="search-wrapper">
+        <span class="search-prefix">&gt;_</span>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="QUERY: project / company / partner / country..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
+
+      <div class="toolbar-count" id="row-count">
+        UNITS: <span>—</span>
+      </div>
+    </div>
+
+    <!-- GRID NODE (Feature 8) -->
+    <div id="grid-panel">
+
+      <!-- FEED FROZEN overlay (Feature 5) -->
+      <div id="paused-overlay">
+        <div class="paused-badge">
+          <span class="paused-icon">⏸</span>
+          <div class="paused-text-wrap">
+            <span class="paused-title">// FEED FROZEN</span>
+            <span class="paused-sub">
+              BACKGROUND CAPTURE ACTIVE //
+              <span id="buffer-count">0</span> ROWS QUEUED
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid wrapper -->
+      <div id="grid-wrapper">
+
+        <!-- Sticky header -->
+        <div id="grid-header-wrap">
+          <table id="grid-header">
+            <colgroup>
+              <col class="col-num"/>
+              <col class="col-pid"/>
+              <col class="col-cid"/>
+              <col class="col-name"/>
+              <col class="col-status"/>
+              <col class="col-type"/>
+              <col class="col-robots"/>
+              <col class="col-budget"/>
+              <col class="col-roi"/>
+              <col class="col-savings"/>
+              <col class="col-hrs"/>
+              <col class="col-dept"/>
+              <col class="col-country"/>
+              <col class="col-industry"/>
+              <col class="col-ai"/>
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="col-num"><div class="th-inner">#</div></th>
+                <th class="col-pid"><div class="th-inner">PROJ-ID</div></th>
+                <th class="col-cid"><div class="th-inner">UNIT-ID</div></th>
+                <th class="col-name"><div class="th-inner">MISSION NAME</div></th>
+                <th class="col-status"><div class="th-inner">FIELD STATUS</div></th>
+                <th class="col-type"><div class="th-inner">OP TYPE</div></th>
+                <th class="col-robots"><div class="th-inner">UNITS</div></th>
+
+                <th class="col-budget sortable" id="th-budget_usd">
+                  <div class="th-inner">
+                    BUDGET USD
+                    <span class="sort-icon">
+                      <span class="sort-icon-up"></span>
+                      <span class="sort-icon-down"></span>
+                    </span>
+                  </div>
+                </th>
+
+                <th class="col-roi sortable" id="th-roi_percent">
+                  <div class="th-inner">
+                    ROI %
+                    <span class="sort-icon">
+                      <span class="sort-icon-up"></span>
+                      <span class="sort-icon-down"></span>
+                    </span>
+                  </div>
+                </th>
+
+                <th class="col-savings"><div class="th-inner">SAVINGS USD</div></th>
+
+                <th class="col-hrs sortable" id="th-employee_hours_saved">
+                  <div class="th-inner">
+                    HRS SAVED
+                    <span class="sort-icon">
+                      <span class="sort-icon-up"></span>
+                      <span class="sort-icon-down"></span>
+                    </span>
+                  </div>
+                </th>
+
+                <th class="col-dept"><div class="th-inner">DIVISION</div></th>
+                <th class="col-country"><div class="th-inner">REGION</div></th>
+                <th class="col-industry"><div class="th-inner">SECTOR</div></th>
+                <th class="col-ai"><div class="th-inner">A.I.</div></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <!-- Scrollable body -->
+        <div id="grid-scroll">
+          <div id="virtual-spacer-top" style="height:0px;display:block;"></div>
+          <table id="grid-table">
+            <colgroup>
+              <col class="col-num"/>
+              <col class="col-pid"/>
+              <col class="col-cid"/>
+              <col class="col-name"/>
+              <col class="col-status"/>
+              <col class="col-type"/>
+              <col class="col-robots"/>
+              <col class="col-budget"/>
+              <col class="col-roi"/>
+              <col class="col-savings"/>
+              <col class="col-hrs"/>
+              <col class="col-dept"/>
+              <col class="col-country"/>
+              <col class="col-industry"/>
+              <col class="col-ai"/>
+            </colgroup>
+            <tbody id="grid-body"></tbody>
+          </table>
+          <div id="virtual-spacer-bottom" style="height:0px;display:block;"></div>
+        </div>
+
+        <!-- Empty state -->
+        <div id="empty-state">
+          <span class="empty-title">// NO UNITS MATCH QUERY</span>
+          <span class="empty-sub">
+            ADJUST FIELD INTEL FILTERS<br/>
+            OR CLEAR SEARCH QUERY<br/>
+            TO RESTORE GRID NODE
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SCRIPTS — load order is critical
+═══════════════════════════════════════════════════ -->
+<script src="./dataStream.js"></script>
+
+<script src="./js/format.js"></script>
+<script src="./js/state.js"></script>
+<script src="./js/stream.js"></script>
+<script src="./js/kpi.js"></script>
+<script src="./js/grid.js"></script>
+<script src="./js/sort.js"></script>
+<script src="./js/filters.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/layout.js"></script>
+<script src="./js/controls.js"></script>
+
+<!-- OVERMIND Boot Sequence -->
+<script>
+(function() {
+  const bar    = document.getElementById('boot-bar');
+  const pct    = document.getElementById('boot-pct');
+  const screen = document.getElementById('loading-screen');
+
+  // Boot lines appear sequentially
+  const lines = [
+    { id: 'bl-0', delay: 0,    progress: 10  },
+    { id: 'bl-1', delay: 180,  progress: 25  },
+    { id: 'bl-2', delay: 380,  progress: 45  },
+    { id: 'bl-3', delay: 560,  progress: 60  },
+    { id: 'bl-4', delay: 720,  progress: 75  },
+    { id: 'bl-5', delay: 880,  progress: 90  },
+    { id: 'bl-6', delay: 1060, progress: 100 },
+  ];
+
+  function setProgress(p) {
+    if (bar) bar.style.width = p + '%';
+    if (pct) pct.textContent = p + '%';
+  }
+
+  lines.forEach(({ id, delay, progress }) => {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('visible');
+      setProgress(progress);
+    }, delay);
+  });
+
+  // Boot complete — init app
+  setTimeout(() => {
+    // Init all modules
+    Layout.init();
+    Grid.init();
+    KPI.init();
+    Controls.init();
+    Sort.init();
+    Filters.init();
+    Search.init();
+    Stream.init();
+
+    // Fade out boot screen
+    setTimeout(() => {
+      screen.classList.add('fade-out');
+      setTimeout(() => { screen.style.display = 'none'; }, 500);
+    }, 400);
+
+  }, 1300);
+
+})();
+</script>
+
 </body>
 </html>
