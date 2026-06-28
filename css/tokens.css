@@ -1,0 +1,142 @@
+/* ============================================================
+   OVERMIND — Design Token System
+   "One Mind. Ten Thousand Machines."
+   Colony/Resistance Terminal Aesthetic
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ── Backgrounds — bunker walls ── */
+  --bg-0:       #060804;
+  --bg-1:       #0C110A;
+  --bg-2:       #121A0F;
+  --bg-3:       #1A2614;
+  --bg-4:       #223018;
+  --bg-5:       #2A3A1E;
+
+  /* ── Phosphor Green — PRIMARY ── */
+  --phosphor:        #39FF14;
+  --phosphor-dim:    #22C55E;
+  --phosphor-mid:    #16A34A;
+  --phosphor-muted:  #166534;
+  --phosphor-ghost:  #0D2410;
+
+  /* ── Amber — SECONDARY (alerts, brand) ── */
+  --amber:       #F59E0B;
+  --amber-dim:   #B45309;
+  --amber-ghost: #1C1000;
+
+  /* ── Mission Blue — intel only ── */
+  --intel:       #67E8F9;
+  --intel-ghost: #0A1F24;
+
+  /* ── Text — CRT phosphor tinted ── */
+  --text-primary:   #D9F99D;
+  --text-secondary: #86EFAC;
+  --text-muted:     #4B5320;
+  --text-dim:       #2D3A18;
+  --text-ghost:     #1A220E;
+
+  /* ── Alert ── */
+  --alert:       #FF4444;
+  --alert-dim:   #DC2626;
+  --alert-bg:    rgba(255,68,68,0.08);
+  --alert-glow:  rgba(255,68,68,0.3);
+
+  /* ── Glows — use sparingly ── */
+  --glow-phosphor: 0 0 8px rgba(57,255,20,0.5), 0 0 20px rgba(57,255,20,0.15);
+  --glow-amber:    0 0 8px rgba(245,158,11,0.5), 0 0 20px rgba(245,158,11,0.15);
+  --glow-alert:    0 0 8px rgba(255,68,68,0.5),  0 0 20px rgba(255,68,68,0.15);
+
+  /* ── Typography ── */
+  --font-terminal: 'Share Tech Mono', 'Courier New', monospace;
+  --font-data:     'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Type Scale ── */
+  --text-xs:   10px;
+  --text-sm:   12px;
+  --text-base: 13px;
+  --text-md:   14px;
+  --text-lg:   16px;
+  --text-xl:   20px;
+  --text-2xl:  28px;
+  --text-3xl:  36px;
+
+  /* ── Spacing ── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+
+  /* ── Layout ── */
+  --topbar-h:  48px;
+  --kpi-h:     96px;
+  --toolbar-h: 52px;
+  --sidebar-w: 224px;
+  --row-h:     36px;
+  --header-h:  40px;
+  --radius:    3px;
+
+  /* ── Borders ── */
+  --border:       1px solid var(--bg-3);
+  --border-lit:   1px solid var(--phosphor-muted);
+  --border-amber: 1px solid var(--amber-dim);
+  --border-alert: 1px solid var(--alert-dim);
+
+  /* ── Transitions ── */
+  --t-fast:   80ms ease;
+  --t-normal: 150ms ease;
+  --t-slow:   300ms ease;
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-0);
+  color: var(--text-primary);
+  font-family: var(--font-terminal);
+  font-size: var(--text-base);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SCANLINE OVERLAY — pure CSS, zero perf cost ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-0); }
+::-webkit-scrollbar-thumb { background: var(--phosphor-muted); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--phosphor-mid); }
+
+/* ── Selection ── */
+::selection { background: rgba(57,255,20,0.2); color: var(--text-primary); }
+
+/* ── Utilities ── */
+.mono    { font-family: var(--font-data); }
+.terminal { font-family: var(--font-terminal); }
+.glow-text { text-shadow: var(--glow-phosphor); }
