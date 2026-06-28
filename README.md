@@ -1,6 +1,6 @@
 # ⬡ OVERMIND — Global Robot Command Network
 
-> *"One Mind. Ten Thousand Machines."*
+> *"One Mind. Many Machines."*
 
 A high-density, real-time Enterprise RPA Command Terminal built for Frontend Battle 3.0 — Round 2. OVERMIND streams, visualizes, sorts, and filters continuous telemetry data from 50,000 robotic field units with zero frame drops and zero memory leaks.
 
