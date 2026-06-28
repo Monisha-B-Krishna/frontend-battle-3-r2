@@ -1,13 +1,12 @@
 /* ============================================================
-   OVERMIND — Design Token System
-   "One Mind. Ten Thousand Machines."
-   Colony/Resistance Terminal Aesthetic — Colour Expert Pass
+   OVERMIND — Design Token System v2
+   Colony/Resistance Terminal — Vivid Palette
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  /* ── Backgrounds — bunker walls ── */
+  /* ── Backgrounds ── */
   --bg-0:       #060804;
   --bg-1:       #0C110A;
   --bg-2:       #121A0F;
@@ -15,65 +14,62 @@
   --bg-4:       #223018;
   --bg-5:       #2A3A1E;
 
-  /* ══════════════════════════════════════════
-     COLONY COLOUR SYSTEM — Expert Pass
-     
-     GREEN  → Primary live data     (peak eye sensitivity)
-     CYAN   → Secondary intel data  (cool, readable, distinct)
-     GOLD   → Financial/money data  (gold = currency, contrast 11:1)
-     AMBER  → Warning states ONLY   (not primary data)
-     RED    → Critical anomaly ONLY
-  ══════════════════════════════════════════ */
-
-  /* ── Phosphor Green — PRIMARY live data ── */
+  /* ── Phosphor Green — PRIMARY ── */
   --phosphor:        #39FF14;
   --phosphor-dim:    #4ADE80;
   --phosphor-mid:    #16A34A;
   --phosphor-muted:  #166534;
   --phosphor-ghost:  #0D2410;
 
-  /* ── Electric Cyan — SECONDARY robot/intel data ── */
-  /* Was amber #F59E0B — contrast 6.8:1 → now 12.4:1 */
+  /* ── Electric Cyan — ROBOTS/INTEL ── */
   --electric:        #00E5FF;
   --electric-dim:    #22D3EE;
   --electric-mid:    #0891B2;
   --electric-muted:  #164E63;
   --electric-ghost:  #071520;
 
-  /* ── Gold — FINANCIAL data only ── */
-  /* Much brighter than old amber — contrast 11.2:1 */
+  /* ── Gold — FINANCIAL ── */
   --gold:            #FFD700;
   --gold-dim:        #FCD34D;
   --gold-mid:        #D97706;
   --gold-muted:      #78350F;
   --gold-ghost:      #1C1200;
 
-  /* ── Amber — WARNING states only (not primary data) ── */
+  /* ── Vivid Purple — PLANNED/STAGED ── */
+  --purple:          #C084FC;
+  --purple-dim:      #A855F7;
+  --purple-muted:    #6B21A8;
+  --purple-ghost:    #1A0A2E;
+
+  /* ── Vivid Teal — ACTIVE METRICS ── */
+  --teal:            #2DD4BF;
+  --teal-dim:        #14B8A6;
+  --teal-muted:      #0F766E;
+  --teal-ghost:      #042A27;
+
+  /* ── Amber — WARNING ONLY ── */
   --amber:       #F59E0B;
   --amber-dim:   #B45309;
   --amber-ghost: #1C1000;
 
-  /* ── Intel Blue — info/planned states ── */
-  --intel:       #67E8F9;
-  --intel-ghost: #0A1F24;
-
-  /* ── Text — CRT phosphor tinted ── */
-  --text-primary:   #D9F99D;
-  --text-secondary: #86EFAC;
-  --text-muted:     #4B5320;
-  --text-dim:       #2D3A18;
-  --text-ghost:     #1A220E;
-
-  /* ── Alert — ANOMALY only ── */
+  /* ── Alert ── */
   --alert:       #FF4444;
   --alert-dim:   #DC2626;
   --alert-bg:    rgba(255,68,68,0.08);
-  --alert-glow:  rgba(255,68,68,0.3);
 
-  /* ── Glows — GPU-safe text-shadow/box-shadow only ── */
+  /* ── Text — FIXED contrast for dark bg ── */
+  --text-primary:   #E2F5E2;   /* bright white-green — Level 1 */
+  --text-secondary: #86EFAC;   /* readable green — Level 2 */
+  --text-muted:     #6DAA6D;   /* visible olive-green — Level 3 FIXED */
+  --text-dim:       #4A7A4A;   /* subtle — reference only */
+  --text-ghost:     #2A4A2A;   /* near-invisible — watermarks */
+
+  /* ── Glows ── */
   --glow-phosphor:  0 0 8px rgba(57,255,20,0.5),   0 0 20px rgba(57,255,20,0.15);
   --glow-electric:  0 0 8px rgba(0,229,255,0.5),   0 0 20px rgba(0,229,255,0.15);
   --glow-gold:      0 0 8px rgba(255,215,0,0.5),   0 0 20px rgba(255,215,0,0.15);
+  --glow-purple:    0 0 8px rgba(192,132,252,0.5), 0 0 20px rgba(192,132,252,0.15);
+  --glow-teal:      0 0 8px rgba(45,212,191,0.5),  0 0 20px rgba(45,212,191,0.15);
   --glow-amber:     0 0 8px rgba(245,158,11,0.5),  0 0 20px rgba(245,158,11,0.15);
   --glow-alert:     0 0 8px rgba(255,68,68,0.5),   0 0 20px rgba(255,68,68,0.15);
 
@@ -92,30 +88,27 @@
   --text-3xl:  36px;
 
   /* ── Spacing ── */
-  --sp-1: 4px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 20px;
-  --sp-6: 24px;
-  --sp-8: 32px;
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px;
+  --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-8: 32px;
 
   /* ── Layout ── */
   --topbar-h:  48px;
   --kpi-h:     88px;
   --toolbar-h: 44px;
   --sidebar-w: 224px;
-  --row-h:     28px;
+  --row-h:     32px;
   --header-h:  40px;
   --radius:    3px;
 
   /* ── Borders ── */
-  --border:         1px solid var(--bg-3);
-  --border-lit:     1px solid var(--phosphor-muted);
-  --border-electric:1px solid var(--electric-muted);
-  --border-gold:    1px solid var(--gold-mid);
-  --border-amber:   1px solid var(--amber-dim);
-  --border-alert:   1px solid var(--alert-dim);
+  --border:          1px solid var(--bg-3);
+  --border-lit:      1px solid var(--phosphor-muted);
+  --border-electric: 1px solid var(--electric-muted);
+  --border-gold:     1px solid var(--gold-mid);
+  --border-amber:    1px solid var(--amber-dim);
+  --border-alert:    1px solid var(--alert-dim);
+  --border-purple:   1px solid var(--purple-muted);
+  --border-teal:     1px solid var(--teal-muted);
 
   /* ── Transitions ── */
   --t-fast:   80ms ease;
@@ -124,11 +117,7 @@
 }
 
 /* ── Reset ── */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
   height: 100%;
@@ -141,17 +130,14 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── SCANLINE OVERLAY — pure CSS, zero perf cost ── */
+/* ── SCANLINE — pure CSS ── */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0,0,0,0.10) 2px,
-    rgba(0,0,0,0.10) 4px
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.10) 2px, rgba(0,0,0,0.10) 4px
   );
   pointer-events: none;
   z-index: 9999;
@@ -163,64 +149,127 @@ body::after {
 ::-webkit-scrollbar-thumb { background: var(--phosphor-muted); border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--phosphor-mid); }
 
-/* ── Selection ── */
 ::selection { background: rgba(57,255,20,0.2); color: var(--text-primary); }
 
-/* ── Utilities ── */
-.mono     { font-family: var(--font-data); }
-.terminal { font-family: var(--font-terminal); }
-
-/* ══ LIGHT MODE TOKENS ══ */
+/* ══ LIGHT MODE ══ */
 body.light-mode {
-  --bg-0:       #F0F4F0;
-  --bg-1:       #E4EDE4;
-  --bg-2:       #D4E4D4;
-  --bg-3:       #B8CCB8;
-  --bg-4:       #9AB89A;
-  --bg-5:       #7AA47A;
+  --bg-0:       #F5F9F5;
+  --bg-1:       #EBF3EB;
+  --bg-2:       #DCE9DC;
+  --bg-3:       #C4D9C4;
+  --bg-4:       #A8C4A8;
+  --bg-5:       #8CAF8C;
 
-  --phosphor:        #1A7A1A;
-  --phosphor-dim:    #2A6A2A;
-  --phosphor-mid:    #3A8A3A;
-  --phosphor-muted:  #4A9A4A;
-  --phosphor-ghost:  rgba(26,122,26,0.1);
+  --phosphor:        #1A6B1A;
+  --phosphor-dim:    #226622;
+  --phosphor-mid:    #2E862E;
+  --phosphor-muted:  #3A963A;
+  --phosphor-ghost:  rgba(26,107,26,0.12);
 
   --electric:        #0066AA;
   --electric-dim:    #0077BB;
-  --electric-muted:  #5599BB;
+  --electric-muted:  #4488AA;
   --electric-ghost:  rgba(0,102,170,0.1);
 
-  --gold:            #AA7700;
-  --gold-dim:        #BB8800;
-  --gold-mid:        #CC9900;
-  --gold-ghost:      rgba(170,119,0,0.1);
+  --gold:            #996600;
+  --gold-dim:        #AA7700;
+  --gold-mid:        #BB8800;
+  --gold-ghost:      rgba(153,102,0,0.1);
 
-  --amber:       #CC7700;
-  --amber-dim:   #AA5500;
-  --amber-ghost: rgba(204,119,0,0.1);
+  --purple:          #7C3AED;
+  --purple-dim:      #8B5CF6;
+  --purple-muted:    #5B21B6;
+  --purple-ghost:    rgba(124,58,237,0.1);
+
+  --teal:            #0D9488;
+  --teal-dim:        #14B8A6;
+  --teal-muted:      #0F766E;
+  --teal-ghost:      rgba(13,148,136,0.1);
+
+  --amber:       #B45309;
+  --amber-dim:   #92400E;
+  --amber-ghost: rgba(180,83,9,0.1);
 
   --alert:       #CC2222;
   --alert-dim:   #AA1111;
   --alert-bg:    rgba(204,34,34,0.08);
 
-  --text-primary:   #1A2A1A;
-  --text-secondary: #2A4A2A;
-  --text-muted:     #5A7A5A;
-  --text-dim:       #8AAA8A;
+  /* LIGHT MODE TEXT — high contrast on light bg */
+  --text-primary:   #0F1F0F;   /* near-black green */
+  --text-secondary: #1E4A1E;   /* dark green */
+  --text-muted:     #3A6A3A;   /* medium green — VISIBLE on light bg */
+  --text-dim:       #6A9A6A;   /* lighter — still readable */
+  --text-ghost:     #9AC49A;   /* subtle */
 
   --glow-phosphor:  none;
   --glow-electric:  none;
   --glow-gold:      none;
+  --glow-purple:    none;
+  --glow-teal:      none;
   --glow-amber:     none;
   --glow-alert:     none;
-
-  --border:          1px solid var(--bg-3);
-  --border-lit:      1px solid var(--phosphor-muted);
-  --border-electric: 1px solid var(--electric-muted);
-  --border-gold:     1px solid var(--gold-mid);
-  --border-amber:    1px solid var(--amber-dim);
-  --border-alert:    1px solid var(--alert-dim);
 }
 
-/* Remove scanlines in light mode */
 body.light-mode::after { display: none; }
+
+body.light-mode #topbar {
+  background: var(--bg-1);
+  border-bottom: 1px solid var(--bg-3);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+body.light-mode #sidebar {
+  background: var(--bg-1);
+  border-right: 1px solid var(--bg-3);
+}
+
+body.light-mode .kpi-card { background: var(--bg-1); }
+body.light-mode #kpi-strip { background: var(--bg-3); }
+
+body.light-mode #grid-header th {
+  background: var(--bg-2) !important;
+  color: var(--text-muted) !important;
+}
+body.light-mode #grid-header-wrap { background: var(--bg-2); border-bottom-color: var(--phosphor-muted); }
+body.light-mode #grid-body tr.row-even { background: var(--bg-0); }
+body.light-mode #grid-body tr.row-odd  { background: var(--bg-1); }
+body.light-mode #grid-body tr:hover    { background: var(--bg-2) !important; }
+body.light-mode #grid-body td { color: var(--text-secondary) !important; }
+body.light-mode td.cell-currency { color: var(--gold-dim) !important; }
+body.light-mode td.cell-pct.pct-positive { color: var(--electric-dim) !important; }
+
+body.light-mode #toolbar { background: var(--bg-1); border-bottom: 1px solid var(--bg-3); }
+body.light-mode #search-input { background: var(--bg-0); color: var(--text-primary); border-color: var(--bg-3); }
+body.light-mode #search-input::placeholder { color: var(--text-dim) !important; }
+body.light-mode .filter-select { background-color: var(--bg-0); color: var(--text-primary); border-color: var(--bg-3); }
+body.light-mode .filter-select option { background: var(--bg-1); color: var(--text-primary); }
+body.light-mode .btn-clear-filters { color: var(--text-secondary) !important; }
+body.light-mode .panel-toggle-label { color: var(--text-primary) !important; }
+body.light-mode .sector-title { color: var(--text-muted) !important; }
+body.light-mode .sort-none-text { color: var(--text-muted) !important; }
+body.light-mode .toolbar-count { color: var(--text-secondary) !important; }
+body.light-mode #clock { color: var(--text-secondary) !important; }
+body.light-mode .topbar-stat-value { color: var(--text-secondary) !important; }
+body.light-mode .signal-status { color: var(--phosphor) !important; }
+body.light-mode .signal-wrap.live .signal-bar { background: var(--phosphor-dim) !important; box-shadow: none !important; }
+body.light-mode #btn-pause { color: var(--phosphor); border-color: var(--phosphor-muted); background: var(--phosphor-ghost); }
+body.light-mode #btn-pause:hover { background: rgba(26,107,26,0.15); }
+body.light-mode .sidebar-footer-text { color: var(--text-dim) !important; }
+
+/* ── Vivid badge updates ── */
+.badge-planned {
+  background: var(--purple-ghost) !important;
+  color: var(--purple) !important;
+  border-color: var(--purple-muted) !important;
+}
+.badge-planned .badge-dot { background: var(--purple) !important; }
+
+.badge-active {
+  background: var(--teal-ghost) !important;
+  color: var(--teal) !important;
+  border-color: var(--teal-muted) !important;
+}
+.badge-active .badge-dot {
+  background: var(--teal) !important;
+  box-shadow: 0 0 4px var(--teal) !important;
+}
