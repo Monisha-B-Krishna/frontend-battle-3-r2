@@ -1,4 +1,4 @@
-# ⬡ OVERMIND — Global Robot Command Network
+# OVERMIND — Global Robot Command Network
 
 > *"One Mind. Many Machines."*
 
