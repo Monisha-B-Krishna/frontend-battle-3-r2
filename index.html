@@ -68,24 +68,15 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     APP SHELL — COMMAND CENTER
-═══════════════════════════════════════════════════ -->
 <div id="app">
 
-  <!-- ── TOPBAR ─────────────────────────────────── -->
   <header id="topbar">
     <div class="topbar-left">
-
-      <!-- Brand -->
       <div class="brand">
         <span class="brand-prefix" style="filter:drop-shadow(0 0 5px rgba(57,255,20,0.6));display:flex;align-items:center;"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="14" r="2.5" fill="#39FF14" opacity="0.9"/><circle cx="14" cy="4" r="2.5" fill="#39FF14" opacity="0.9"/><circle cx="24" cy="14" r="2.5" fill="#39FF14" opacity="0.9"/><circle cx="14" cy="24" r="2.5" fill="#39FF14" opacity="0.9"/><circle cx="14" cy="14" r="3" fill="#39FF14"/><line x1="6.5" y1="14" x2="11" y2="14" stroke="#39FF14" stroke-width="1.2" opacity="0.7"/><line x1="17" y1="14" x2="21.5" y2="14" stroke="#39FF14" stroke-width="1.2" opacity="0.7"/><line x1="14" y1="6.5" x2="14" y2="11" stroke="#39FF14" stroke-width="1.2" opacity="0.7"/><line x1="14" y1="17" x2="14" y2="21.5" stroke="#39FF14" stroke-width="1.2" opacity="0.7"/><line x1="6.2" y1="11.8" x2="11.8" y2="6.2" stroke="#39FF14" stroke-width="0.8" opacity="0.4"/><line x1="16.2" y1="6.2" x2="21.8" y2="11.8" stroke="#39FF14" stroke-width="0.8" opacity="0.4"/><line x1="6.2" y1="16.2" x2="11.8" y2="21.8" stroke="#39FF14" stroke-width="0.8" opacity="0.4"/><line x1="16.2" y1="21.8" x2="21.8" y2="16.2" stroke="#39FF14" stroke-width="0.8" opacity="0.4"/></svg></span>
         <span class="brand-name" style="font-size:26px;letter-spacing:0.28em;text-shadow:var(--glow-phosphor);">OVERMIND</span>
       </div>
-
       <span class="topbar-sep">|</span>
-
-      <!-- Signal Strength (replaces stream dot) -->
       <div class="signal-wrap live" id="signal-wrap">
         <span class="signal-label">SIG</span>
         <div class="signal-bar"></div>
@@ -95,18 +86,13 @@
         <div class="signal-bar"></div>
         <span class="signal-status" id="signal-status">LIVE</span>
       </div>
-
       <span class="topbar-sep">|</span>
-
-      <!-- Tick counter -->
       <div class="topbar-stat">
         <span class="topbar-stat-label">Ticks Recv</span>
         <span class="topbar-stat-value" id="stream-ticks">0</span>
       </div>
-
     </div>
 
-    <!-- Center -->
     <div class="topbar-center">
       <div class="topbar-stat">
         <span class="topbar-stat-label">Tick Rate</span>
@@ -125,18 +111,20 @@
     </div>
 
     <div class="topbar-right">
-
-      <!-- Buffer alert (paused) -->
       <div id="buffer-indicator">
         <span class="buffer-dot"></span>
         <span>BUFFERED:</span>
         <span id="buffer-count-top">0</span>
       </div>
 
-      <!-- Theme Toggle -->
+      <!-- ADD 1: Analytics button -->
+      <button id="btn-analytics" title="Analytics View"
+        style="display:flex;align-items:center;gap:6px;height:32px;padding:0 12px;background:var(--electric-ghost);color:var(--electric-dim);border:1px solid var(--electric-muted);border-radius:3px;font-family:var(--font-terminal);font-size:11px;letter-spacing:0.08em;cursor:pointer;transition:all 80ms ease;white-space:nowrap;flex-shrink:0;">
+        ◈ ANALYTICS VIEW
+      </button>
+
       <button id="btn-theme-toggle" title="Switch to light mode">☀</button>
 
-      <!-- Freeze/Resume -->
       <button id="btn-pause">
         <svg viewBox="0 0 16 16">
           <rect x="3" y="2" width="4" height="12"/>
@@ -145,79 +133,49 @@
         FREEZE FEED
       </button>
 
-      <!-- Clock -->
       <span id="clock">--:--:--</span>
     </div>
   </header>
 
-  <!-- ── SIDEBAR ────────────────────────────────── -->
   <aside id="sidebar">
-    <!-- Sidebar Header with toggle -->
     <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px 8px;border-bottom:1px solid var(--bg-3);flex-shrink:0;">
       <span style="font-family:var(--font-terminal);font-size:9px;color:var(--text-muted);letter-spacing:0.2em;text-transform:uppercase;">CONTROL PANEL</span>
       <button id="btn-sidebar-toggle" title="Collapse sidebar" style="width:24px;height:24px;background:var(--bg-2);border:var(--border);border-radius:var(--radius);color:var(--text-secondary);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 80ms ease;flex-shrink:0;">✕</button>
     </div>
 
-    <!-- SECTOR-01: Panel Control (Feature 6) -->
     <div class="sidebar-sector">
       <div class="sector-title">PANELS // show or hide sections</div>
-
       <div class="panel-toggle" id="toggle-kpi">
-        <span class="panel-toggle-label">
-          <span class="sector-icon">◈</span>
-          Metrics Strip
-        </span>
+        <span class="panel-toggle-label"><span class="sector-icon">◈</span>Metrics Strip</span>
         <div class="toggle-switch on"></div>
       </div>
-
       <div class="panel-toggle" id="toggle-toolbar">
-        <span class="panel-toggle-label">
-          <span class="sector-icon">◈</span>
-          Search Bar
-        </span>
+        <span class="panel-toggle-label"><span class="sector-icon">◈</span>Search Bar</span>
         <div class="toggle-switch on"></div>
       </div>
-
       <div class="panel-toggle" id="toggle-grid">
-        <span class="panel-toggle-label">
-          <span class="sector-icon">◈</span>
-          Data Grid
-        </span>
+        <span class="panel-toggle-label"><span class="sector-icon">◈</span>Data Grid</span>
         <div class="toggle-switch on"></div>
       </div>
     </div>
 
-    <!-- SECTOR-02: Field Intel / Filters (Feature 7) -->
     <div class="sidebar-sector">
       <div class="sector-title">FILTERS // narrow down data</div>
-
       <div class="filter-group">
         <label class="filter-label" for="filter-automation_type">Automation Type</label>
-        <select class="filter-select" id="filter-automation_type">
-          <option value="">ALL TYPES</option>
-        </select>
+        <select class="filter-select" id="filter-automation_type"><option value="">ALL TYPES</option></select>
       </div>
-
       <div class="filter-group">
         <label class="filter-label" for="filter-department">Department</label>
-        <select class="filter-select" id="filter-department">
-          <option value="">ALL DEPARTMENTS</option>
-        </select>
+        <select class="filter-select" id="filter-department"><option value="">ALL DEPARTMENTS</option></select>
       </div>
-
       <div class="filter-group">
         <label class="filter-label" for="filter-industry">Industry</label>
-        <select class="filter-select" id="filter-industry">
-          <option value="">ALL INDUSTRIES</option>
-        </select>
+        <select class="filter-select" id="filter-industry"><option value="">ALL INDUSTRIES</option></select>
       </div>
-
-      <button class="btn-clear-filters" id="btn-clear-filters">
-        Clear All Filters
-      </button>
+      <button class="btn-clear-filters" id="btn-clear-filters">Clear All Filters</button>
     </div>
 
-    <!-- Footer -->
     <div class="sidebar-footer">
       <div class="sidebar-footer-text">
         OVERMIND COMMAND NETWORK<br/>
@@ -227,12 +185,9 @@
     </div>
   </aside>
 
-  <!-- ── MAIN ───────────────────────────────────── -->
   <main id="main">
 
-    <!-- KPI READOUT (Feature 1) -->
     <div id="kpi-strip">
-
       <div class="kpi-card kpi-rows">
         <div class="kpi-card-icon">◎</div>
         <div class="kpi-card-body">
@@ -241,7 +196,6 @@
           <span class="kpi-sub"><span class="kpi-live-dot"></span> Live · updates every 200ms</span>
         </div>
       </div>
-
       <div class="kpi-card kpi-robots">
         <div class="kpi-card-icon">⊕</div>
         <div class="kpi-card-body">
@@ -250,7 +204,6 @@
           <span class="kpi-sub"><span class="kpi-live-dot"></span> Running total from stream</span>
         </div>
       </div>
-
       <div class="kpi-card kpi-savings">
         <div class="kpi-card-icon">$</div>
         <div class="kpi-card-body">
@@ -259,79 +212,43 @@
           <span class="kpi-sub"><span class="kpi-live-dot"></span> Cumulative USD savings</span>
         </div>
       </div>
-
     </div>
 
-    <!-- COMMAND BAR (toolbar) -->
     <div id="toolbar">
       <div class="search-wrapper">
         <span class="search-prefix">&gt;_</span>
-        <input
-          type="text"
-          id="search-input"
-          placeholder="Search by project name, company, partner or country..."
-          autocomplete="off"
-          spellcheck="false"
-        />
+        <input type="text" id="search-input" placeholder="Search by project name, company, partner or country..." autocomplete="off" spellcheck="false"/>
       </div>
-
-      <div class="toolbar-count" id="row-count">
-        UNITS: <span>—</span>
-      </div>
-
+      <div class="toolbar-count" id="row-count">UNITS: <span>—</span></div>
       <div id="sort-indicator" style="font-family:var(--font-terminal);font-size:10px;color:var(--text-muted);white-space:nowrap;padding:0 8px;border-left:1px solid var(--bg-3);">
         <span class="sort-none-text">↕ BUDGET · ROI% · HRS — click to sort · Shift+click = multi</span>
       </div>
-
-      <!-- BOUNTY: Snapshot Export Button -->
-      <button id="btn-export"
-        title="Export current filtered+sorted view as CSV (Ctrl+Shift+E)"
+      <button id="btn-export" title="Export current filtered+sorted view as CSV (Ctrl+Shift+E)"
         style="height:30px;padding:0 12px;background:var(--phosphor-ghost);border:1px solid var(--phosphor-muted);border-radius:3px;color:var(--phosphor);font-family:var(--font-terminal);font-size:11px;letter-spacing:0.08em;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 80ms ease;">
         ⬇ EXPORT CSV
       </button>
       <span id="export-feedback" style="display:none;font-family:var(--font-terminal);font-size:10px;padding:0 8px;color:var(--phosphor-dim);"></span>
-
     </div>
 
-    <!-- GRID NODE (Feature 8) -->
     <div id="grid-panel">
-
-      <!-- FEED FROZEN overlay (Feature 5) -->
       <div id="paused-overlay">
         <div class="paused-badge">
           <span class="paused-icon">⏸</span>
           <div class="paused-text-wrap">
             <span class="paused-title">// FEED FROZEN</span>
-            <span class="paused-sub">
-              BACKGROUND CAPTURE ACTIVE //
-              <span id="buffer-count">0</span> ROWS QUEUED
-            </span>
+            <span class="paused-sub">BACKGROUND CAPTURE ACTIVE // <span id="buffer-count">0</span> ROWS QUEUED</span>
           </div>
         </div>
       </div>
 
-      <!-- Grid wrapper -->
       <div id="grid-wrapper">
-
-        <!-- Sticky header -->
         <div id="grid-header-wrap">
           <table id="grid-header">
             <colgroup>
-              <col class="col-num"/>
-              <col class="col-pid"/>
-              <col class="col-cid"/>
-              <col class="col-name"/>
-              <col class="col-status"/>
-              <col class="col-type"/>
-              <col class="col-robots"/>
-              <col class="col-budget"/>
-              <col class="col-roi"/>
-              <col class="col-savings"/>
-              <col class="col-hrs"/>
-              <col class="col-dept"/>
-              <col class="col-country"/>
-              <col class="col-industry"/>
-              <col class="col-ai"/>
+              <col class="col-num"/><col class="col-pid"/><col class="col-cid"/><col class="col-name"/>
+              <col class="col-status"/><col class="col-type"/><col class="col-robots"/><col class="col-budget"/>
+              <col class="col-roi"/><col class="col-savings"/><col class="col-hrs"/><col class="col-dept"/>
+              <col class="col-country"/><col class="col-industry"/><col class="col-ai"/>
             </colgroup>
             <thead>
               <tr>
@@ -342,39 +259,16 @@
                 <th class="col-status"><div class="th-inner">FIELD STATUS</div></th>
                 <th class="col-type"><div class="th-inner">OP TYPE</div></th>
                 <th class="col-robots"><div class="th-inner">UNITS</div></th>
-
                 <th class="col-budget sortable" id="th-budget_usd">
-                  <div class="th-inner">
-                    BUDGET USD
-                    <span class="sort-icon">
-                      <span class="sort-icon-up"></span>
-                      <span class="sort-icon-down"></span>
-                    </span>
-                  </div>
+                  <div class="th-inner">BUDGET USD<span class="sort-icon"><span class="sort-icon-up"></span><span class="sort-icon-down"></span></span></div>
                 </th>
-
                 <th class="col-roi sortable" id="th-roi_percent">
-                  <div class="th-inner">
-                    ROI %
-                    <span class="sort-icon">
-                      <span class="sort-icon-up"></span>
-                      <span class="sort-icon-down"></span>
-                    </span>
-                  </div>
+                  <div class="th-inner">ROI %<span class="sort-icon"><span class="sort-icon-up"></span><span class="sort-icon-down"></span></span></div>
                 </th>
-
                 <th class="col-savings"><div class="th-inner">SAVINGS USD</div></th>
-
                 <th class="col-hrs sortable" id="th-employee_hours_saved">
-                  <div class="th-inner">
-                    HRS SAVED
-                    <span class="sort-icon">
-                      <span class="sort-icon-up"></span>
-                      <span class="sort-icon-down"></span>
-                    </span>
-                  </div>
+                  <div class="th-inner">HRS SAVED<span class="sort-icon"><span class="sort-icon-up"></span><span class="sort-icon-down"></span></span></div>
                 </th>
-
                 <th class="col-dept"><div class="th-inner">DIVISION</div></th>
                 <th class="col-country"><div class="th-inner">REGION</div></th>
                 <th class="col-industry"><div class="th-inner">SECTOR</div></th>
@@ -384,53 +278,57 @@
           </table>
         </div>
 
-        <!-- Scrollable body -->
         <div id="grid-scroll">
           <div id="virtual-spacer-top" style="height:0px;display:block;"></div>
           <table id="grid-table">
             <colgroup>
-              <col class="col-num"/>
-              <col class="col-pid"/>
-              <col class="col-cid"/>
-              <col class="col-name"/>
-              <col class="col-status"/>
-              <col class="col-type"/>
-              <col class="col-robots"/>
-              <col class="col-budget"/>
-              <col class="col-roi"/>
-              <col class="col-savings"/>
-              <col class="col-hrs"/>
-              <col class="col-dept"/>
-              <col class="col-country"/>
-              <col class="col-industry"/>
-              <col class="col-ai"/>
+              <col class="col-num"/><col class="col-pid"/><col class="col-cid"/><col class="col-name"/>
+              <col class="col-status"/><col class="col-type"/><col class="col-robots"/><col class="col-budget"/>
+              <col class="col-roi"/><col class="col-savings"/><col class="col-hrs"/><col class="col-dept"/>
+              <col class="col-country"/><col class="col-industry"/><col class="col-ai"/>
             </colgroup>
             <tbody id="grid-body"></tbody>
           </table>
           <div id="virtual-spacer-bottom" style="height:0px;display:block;"></div>
         </div>
 
-        <!-- Empty state -->
         <div id="empty-state">
           <span class="empty-title">// NO UNITS MATCH QUERY</span>
-          <span class="empty-sub">
-            ADJUST FIELD INTEL FILTERS<br/>
-            OR CLEAR SEARCH QUERY<br/>
-            TO RESTORE GRID NODE
-          </span>
+          <span class="empty-sub">ADJUST FIELD INTEL FILTERS<br/>OR CLEAR SEARCH QUERY<br/>TO RESTORE GRID NODE</span>
         </div>
-
       </div>
     </div>
 
   </main>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     SCRIPTS — load order is critical
-═══════════════════════════════════════════════════ -->
-<script src="./dataStream.js"></script>
+<!-- ADD 4: Analytics Overlay -->
+<div id="analytics-overlay" style="display:none;position:fixed;inset:0;background:rgba(4,8,4,0.97);z-index:500;flex-direction:column;height:100vh;overflow:hidden;">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--zone-topbar);border-bottom:2px solid var(--phosphor-muted);flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="font-family:var(--font-terminal);font-size:16px;color:var(--phosphor);letter-spacing:0.2em;">◈ ANALYTICS VIEW</span>
+      <span id="analytics-row-count" style="font-family:var(--font-data);font-size:11px;color:var(--electric-dim);">loading...</span>
+      <span style="font-family:var(--font-terminal);font-size:9px;color:var(--text-muted);padding:2px 8px;background:var(--bg-2);border:var(--border);border-radius:3px;">AUTO-REFRESH 2s</span>
+    </div>
+    <button id="btn-analytics-close" style="height:28px;padding:0 14px;background:var(--alert-bg);color:var(--alert);border:1px solid var(--alert-dim);border-radius:3px;font-family:var(--font-terminal);font-size:11px;cursor:pointer;">✕ CLOSE</button>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;padding:8px;flex:1;min-height:0;height:calc(100vh - 56px);overflow:hidden;">
+    <div style="background:var(--zone-metrics);border:1px solid var(--bg-3);border-radius:3px;padding:4px;display:flex;flex-direction:column;">
+      <canvas id="chart-status" style="flex:1;width:100%;min-height:220px;"></canvas>
+    </div>
+    <div style="background:var(--zone-metrics);border:1px solid var(--bg-3);border-radius:3px;padding:4px;display:flex;flex-direction:column;">
+      <canvas id="chart-industry" style="flex:1;width:100%;min-height:220px;"></canvas>
+    </div>
+    <div style="background:var(--zone-metrics);border:1px solid var(--bg-3);border-radius:3px;padding:4px;display:flex;flex-direction:column;">
+      <canvas id="chart-automation" style="flex:1;width:100%;min-height:220px;"></canvas>
+    </div>
+    <div style="background:var(--zone-metrics);border:1px solid var(--bg-3);border-radius:3px;padding:4px;display:flex;flex-direction:column;">
+      <canvas id="chart-roi" style="flex:1;width:100%;min-height:220px;"></canvas>
+    </div>
+  </div>
+</div>
 
+<script src="./dataStream.js"></script>
 <script src="./js/format.js"></script>
 <script src="./js/state.js"></script>
 <script src="./js/stream.js"></script>
@@ -443,8 +341,9 @@
 <script src="./js/controls.js"></script>
 <script src="./js/export.js"></script>
 <script src="./js/theme.js"></script>
+<!-- ADD 2: analytics script -->
+<script src="./js/analytics.js"></script>
 
-<!-- OVERMIND Boot Sequence -->
 <script>
 (function() {
   const bar    = document.getElementById('boot-bar');
@@ -485,6 +384,7 @@
     Stream.init();
     Export.init();
     Theme.init();
+    Analytics.init(); /* ADD 3 */
 
     setTimeout(() => {
       screen.classList.add('fade-out');
@@ -492,7 +392,6 @@
     }, 400);
 
   }, 1300);
-
 })();
 </script>
 
