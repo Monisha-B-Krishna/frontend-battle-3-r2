@@ -80,8 +80,7 @@
       <!-- Brand -->
       <div class="brand">
         <span class="brand-prefix" style="color:var(--phosphor);font-size:20px;text-shadow:var(--glow-phosphor);">⬡</span>
-<span class="brand-name">OVERMIND</span>
-        
+        <span class="brand-name">OVERMIND</span>
       </div>
 
       <span class="topbar-sep">|</span>
@@ -210,8 +209,6 @@
       </button>
     </div>
 
-    
-
     <!-- Footer -->
     <div class="sidebar-footer">
       <div class="sidebar-footer-text">
@@ -273,9 +270,19 @@
       <div class="toolbar-count" id="row-count">
         UNITS: <span>—</span>
       </div>
+
       <div id="sort-indicator" style="font-family:var(--font-terminal);font-size:10px;color:var(--text-muted);white-space:nowrap;padding:0 8px;border-left:1px solid var(--bg-3);">
-  <span class="sort-none-text">↕ BUDGET · ROI% · HRS — click to sort · Shift+click = multi</span>
-</div>
+        <span class="sort-none-text">↕ BUDGET · ROI% · HRS — click to sort · Shift+click = multi</span>
+      </div>
+
+      <!-- BOUNTY: Snapshot Export Button -->
+      <button id="btn-export"
+        title="Export current filtered+sorted view as CSV (Ctrl+Shift+E)"
+        style="height:30px;padding:0 12px;background:var(--phosphor-ghost);border:1px solid var(--phosphor-muted);border-radius:3px;color:var(--phosphor);font-family:var(--font-terminal);font-size:11px;letter-spacing:0.08em;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 80ms ease;">
+        ⬇ EXPORT CSV
+      </button>
+      <span id="export-feedback" style="display:none;font-family:var(--font-terminal);font-size:10px;padding:0 8px;color:var(--phosphor-dim);"></span>
+
     </div>
 
     <!-- GRID NODE (Feature 8) -->
@@ -426,6 +433,7 @@
 <script src="./js/search.js"></script>
 <script src="./js/layout.js"></script>
 <script src="./js/controls.js"></script>
+<script src="./js/export.js"></script>
 
 <!-- OVERMIND Boot Sequence -->
 <script>
@@ -434,7 +442,6 @@
   const pct    = document.getElementById('boot-pct');
   const screen = document.getElementById('loading-screen');
 
-  // Boot lines appear sequentially
   const lines = [
     { id: 'bl-0', delay: 0,    progress: 10  },
     { id: 'bl-1', delay: 180,  progress: 25  },
@@ -458,9 +465,7 @@
     }, delay);
   });
 
-  // Boot complete — init app
   setTimeout(() => {
-    // Init all modules
     Layout.init();
     Grid.init();
     KPI.init();
@@ -469,8 +474,8 @@
     Filters.init();
     Search.init();
     Stream.init();
+    Export.init();
 
-    // Fade out boot screen
     setTimeout(() => {
       screen.classList.add('fade-out');
       setTimeout(() => { screen.style.display = 'none'; }, 500);
