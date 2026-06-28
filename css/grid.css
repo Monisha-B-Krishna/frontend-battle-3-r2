@@ -172,9 +172,9 @@ td.cell-int {
   color: var(--text-primary);
 }
 
-td.cell-currency { color: var(--phosphor-dim); }
+td.cell-currency { color: var(--gold-dim); }
 
-td.cell-pct.pct-positive { color: var(--intel); }
+td.cell-pct.pct-positive { color: var(--electric-dim); }
 td.cell-pct.pct-negative { color: var(--alert); }
 
 td.cell-id {
@@ -217,4 +217,39 @@ td.cell-row-num {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
+}
+
+/* ══ VISIBILITY FIX — column headers and grid text ══ */
+
+/* Column headers — readable */
+#grid-header th {
+  color: var(--text-secondary) !important;
+  font-size: 11px !important;
+}
+
+#grid-header th.sortable:hover {
+  color: var(--text-primary) !important;
+}
+
+#grid-header th.sort-active {
+  color: var(--phosphor-dim) !important;
+}
+
+#grid-header th.sort-active-multi {
+  color: var(--gold-dim) !important;
+}
+
+/* Grid body text — readable */
+#grid-body td {
+  color: var(--text-secondary) !important;
+}
+
+/* ID cells */
+td.cell-id {
+  color: var(--text-muted) !important;
+}
+
+/* Row number */
+td.cell-row-num {
+  color: var(--text-muted) !important;
 }

@@ -72,7 +72,7 @@
 .brand-version {
   font-family: var(--font-data);
   font-size: 9px;
-  color: var(--text-muted);
+  color: var(--text-primary);
   letter-spacing: 0.1em;
   align-self: flex-end;
   margin-bottom: 2px;
@@ -99,7 +99,7 @@
 .signal-label {
   font-family: var(--font-terminal);
   font-size: 9px;
-  color: var(--text-muted);
+  color: var(--text-primary);
   letter-spacing: 0.12em;
   margin-right: var(--sp-1);
   align-self: center;
@@ -162,7 +162,7 @@
 
 .topbar-stat-label {
   font-size: 9px;
-  color: var(--text-muted);
+  color: var(--text-primary);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -211,6 +211,7 @@
   color: var(--amber);
 }
 
+/* amber hover correct for warning state */
 #btn-pause.paused:hover {
   background: var(--amber-ghost);
   box-shadow: var(--glow-amber);
@@ -226,7 +227,7 @@
 #clock {
   font-family: var(--font-data);
   font-size: var(--text-sm);
-  color: var(--text-muted);
+  color: var(--text-primary);
   letter-spacing: 0.06em;
   min-width: 68px;
   text-align: right;
@@ -283,7 +284,7 @@
 .panel-toggle-label {
   font-family: var(--font-terminal);
   font-size: var(--text-sm);
-  color: var(--text-muted);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: var(--sp-2);
@@ -338,7 +339,7 @@
 .filter-label {
   font-family: var(--font-terminal);
   font-size: 9px;
-  color: var(--text-muted);
+  color: var(--text-primary);
   letter-spacing: 0.15em;
   margin-bottom: var(--sp-1);
   display: block;
@@ -351,7 +352,7 @@
   background: var(--bg-2);
   border: var(--border);
   border-radius: var(--radius);
-  color: var(--text-secondary);
+  color: var(--text-primary);
   font-family: var(--font-terminal);
   font-size: var(--text-sm);
   padding: 0 var(--sp-2);
@@ -382,7 +383,7 @@
   background: transparent;
   border: var(--border);
   border-radius: var(--radius);
-  color: var(--text-muted);
+  color: var(--text-primary);
   font-family: var(--font-terminal);
   font-size: var(--text-xs);
   letter-spacing: 0.12em;
@@ -482,4 +483,66 @@
   display: flex;
   align-items: center;
   gap: var(--sp-2);
+}
+
+/* ══ VISIBILITY FIX — sidebar text contrast ══ */
+.sector-title {
+  color: var(--phosphor-dim) !important;
+  font-size: 10px !important;
+}
+
+.panel-toggle-label {
+  color: var(--text-primary) !important;
+}
+
+.filter-label {
+  color: var(--text-secondary) !important;
+  font-size: 11px !important;
+}
+
+.filter-select {
+  color: var(--text-primary) !important;
+  font-size: 12px !important;
+}
+
+.filter-select option {
+  color: var(--text-primary) !important;
+  background: var(--bg-1) !important;
+}
+
+.btn-clear-filters {
+  color: var(--text-secondary) !important;
+  border-color: var(--bg-4) !important;
+  font-size: 11px !important;
+}
+
+.btn-clear-filters:hover {
+  color: var(--alert) !important;
+  border-color: var(--alert-dim) !important;
+}
+
+.sort-none-text {
+  color: var(--text-secondary) !important;
+  font-size: 11px !important;
+  line-height: 1.8 !important;
+}
+
+.sidebar-footer-text {
+  color: var(--text-muted) !important;
+  font-size: 10px !important;
+}
+
+.sidebar-footer-text .callsign {
+  color: var(--phosphor-muted) !important;
+}
+
+/* Clock brighter */
+#clock {
+  color: var(--text-secondary) !important;
+}
+
+/* Topbar stat labels brighter */
+.topbar-stat-label {
+  color: var(--text-secondary) !important;
+  font-size: 10px !important;
 }

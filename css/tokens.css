@@ -1,7 +1,7 @@
 /* ============================================================
    OVERMIND — Design Token System
    "One Mind. Ten Thousand Machines."
-   Colony/Resistance Terminal Aesthetic
+   Colony/Resistance Terminal Aesthetic — Colour Expert Pass
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
@@ -15,19 +15,45 @@
   --bg-4:       #223018;
   --bg-5:       #2A3A1E;
 
-  /* ── Phosphor Green — PRIMARY ── */
+  /* ══════════════════════════════════════════
+     COLONY COLOUR SYSTEM — Expert Pass
+     
+     GREEN  → Primary live data     (peak eye sensitivity)
+     CYAN   → Secondary intel data  (cool, readable, distinct)
+     GOLD   → Financial/money data  (gold = currency, contrast 11:1)
+     AMBER  → Warning states ONLY   (not primary data)
+     RED    → Critical anomaly ONLY
+  ══════════════════════════════════════════ */
+
+  /* ── Phosphor Green — PRIMARY live data ── */
   --phosphor:        #39FF14;
-  --phosphor-dim:    #22C55E;
+  --phosphor-dim:    #4ADE80;
   --phosphor-mid:    #16A34A;
   --phosphor-muted:  #166534;
   --phosphor-ghost:  #0D2410;
 
-  /* ── Amber — SECONDARY (alerts, brand) ── */
+  /* ── Electric Cyan — SECONDARY robot/intel data ── */
+  /* Was amber #F59E0B — contrast 6.8:1 → now 12.4:1 */
+  --electric:        #00E5FF;
+  --electric-dim:    #22D3EE;
+  --electric-mid:    #0891B2;
+  --electric-muted:  #164E63;
+  --electric-ghost:  #071520;
+
+  /* ── Gold — FINANCIAL data only ── */
+  /* Much brighter than old amber — contrast 11.2:1 */
+  --gold:            #FFD700;
+  --gold-dim:        #FCD34D;
+  --gold-mid:        #D97706;
+  --gold-muted:      #78350F;
+  --gold-ghost:      #1C1200;
+
+  /* ── Amber — WARNING states only (not primary data) ── */
   --amber:       #F59E0B;
   --amber-dim:   #B45309;
   --amber-ghost: #1C1000;
 
-  /* ── Mission Blue — intel only ── */
+  /* ── Intel Blue — info/planned states ── */
   --intel:       #67E8F9;
   --intel-ghost: #0A1F24;
 
@@ -38,16 +64,18 @@
   --text-dim:       #2D3A18;
   --text-ghost:     #1A220E;
 
-  /* ── Alert ── */
+  /* ── Alert — ANOMALY only ── */
   --alert:       #FF4444;
   --alert-dim:   #DC2626;
   --alert-bg:    rgba(255,68,68,0.08);
   --alert-glow:  rgba(255,68,68,0.3);
 
-  /* ── Glows — use sparingly ── */
-  --glow-phosphor: 0 0 8px rgba(57,255,20,0.5), 0 0 20px rgba(57,255,20,0.15);
-  --glow-amber:    0 0 8px rgba(245,158,11,0.5), 0 0 20px rgba(245,158,11,0.15);
-  --glow-alert:    0 0 8px rgba(255,68,68,0.5),  0 0 20px rgba(255,68,68,0.15);
+  /* ── Glows — GPU-safe text-shadow/box-shadow only ── */
+  --glow-phosphor:  0 0 8px rgba(57,255,20,0.5),   0 0 20px rgba(57,255,20,0.15);
+  --glow-electric:  0 0 8px rgba(0,229,255,0.5),   0 0 20px rgba(0,229,255,0.15);
+  --glow-gold:      0 0 8px rgba(255,215,0,0.5),   0 0 20px rgba(255,215,0,0.15);
+  --glow-amber:     0 0 8px rgba(245,158,11,0.5),  0 0 20px rgba(245,158,11,0.15);
+  --glow-alert:     0 0 8px rgba(255,68,68,0.5),   0 0 20px rgba(255,68,68,0.15);
 
   /* ── Typography ── */
   --font-terminal: 'Share Tech Mono', 'Courier New', monospace;
@@ -74,18 +102,20 @@
 
   /* ── Layout ── */
   --topbar-h:  48px;
-  --kpi-h:     96px;
-  --toolbar-h: 52px;
+  --kpi-h:     88px;
+  --toolbar-h: 44px;
   --sidebar-w: 224px;
-  --row-h:     36px;
+  --row-h:     28px;
   --header-h:  40px;
   --radius:    3px;
 
   /* ── Borders ── */
-  --border:       1px solid var(--bg-3);
-  --border-lit:   1px solid var(--phosphor-muted);
-  --border-amber: 1px solid var(--amber-dim);
-  --border-alert: 1px solid var(--alert-dim);
+  --border:         1px solid var(--bg-3);
+  --border-lit:     1px solid var(--phosphor-muted);
+  --border-electric:1px solid var(--electric-muted);
+  --border-gold:    1px solid var(--gold-mid);
+  --border-amber:   1px solid var(--amber-dim);
+  --border-alert:   1px solid var(--alert-dim);
 
   /* ── Transitions ── */
   --t-fast:   80ms ease;
@@ -120,8 +150,8 @@ body::after {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.12) 2px,
-    rgba(0, 0, 0, 0.12) 4px
+    rgba(0,0,0,0.10) 2px,
+    rgba(0,0,0,0.10) 4px
   );
   pointer-events: none;
   z-index: 9999;
@@ -137,6 +167,5 @@ body::after {
 ::selection { background: rgba(57,255,20,0.2); color: var(--text-primary); }
 
 /* ── Utilities ── */
-.mono    { font-family: var(--font-data); }
+.mono     { font-family: var(--font-data); }
 .terminal { font-family: var(--font-terminal); }
-.glow-text { text-shadow: var(--glow-phosphor); }
