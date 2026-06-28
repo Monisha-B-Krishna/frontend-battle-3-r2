@@ -1,107 +1,79 @@
 /* ============================================================
-   OVERMIND — Design Token System v2
-   Colony/Resistance Terminal — Vivid Palette
+   OVERMIND — Design Token System v3
+   Zone-based backgrounds + vivid palette + contrast fixed
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  /* ── Backgrounds ── */
-  --bg-0:       #060804;
-  --bg-1:       #0C110A;
-  --bg-2:       #121A0F;
-  --bg-3:       #1A2614;
-  --bg-4:       #223018;
-  --bg-5:       #2A3A1E;
+  /* ── ZONE BACKGROUNDS — dark mode ── */
+  --zone-topbar:   #080E06;   /* deepest — command level */
+  --zone-sidebar:  #0A1208;   /* navigation level */
+  --zone-metrics:  #0D1A0A;   /* data readout level */
+  --zone-toolbar:  #0B140A;   /* action/search level */
+  --zone-grid:     #060804;   /* content level */
+  --zone-header:   #111C0E;   /* column headers — distinct from rows */
 
-  /* ── Phosphor Green — PRIMARY ── */
-  --phosphor:        #39FF14;
-  --phosphor-dim:    #4ADE80;
-  --phosphor-mid:    #16A34A;
-  --phosphor-muted:  #166534;
-  --phosphor-ghost:  #0D2410;
+  /* ── Standard bg scale ── */
+  --bg-0:  #060804;
+  --bg-1:  #0C110A;
+  --bg-2:  #121A0F;
+  --bg-3:  #1A2614;
+  --bg-4:  #223018;
+  --bg-5:  #2A3A1E;
 
-  /* ── Electric Cyan — ROBOTS/INTEL ── */
-  --electric:        #00E5FF;
-  --electric-dim:    #22D3EE;
-  --electric-mid:    #0891B2;
-  --electric-muted:  #164E63;
-  --electric-ghost:  #071520;
+  /* ── Phosphor Green ── */
+  --phosphor:       #39FF14;
+  --phosphor-dim:   #4ADE80;
+  --phosphor-mid:   #16A34A;
+  --phosphor-muted: #166534;
+  --phosphor-ghost: #0D2410;
 
-  /* ── Gold — FINANCIAL ── */
-  --gold:            #FFD700;
-  --gold-dim:        #FCD34D;
-  --gold-mid:        #D97706;
-  --gold-muted:      #78350F;
-  --gold-ghost:      #1C1200;
+  /* ── Electric Cyan ── */
+  --electric:       #00E5FF;
+  --electric-dim:   #22D3EE;
+  --electric-mid:   #0891B2;
+  --electric-muted: #164E63;
+  --electric-ghost: #071520;
 
-  /* ── Vivid Purple — PLANNED/STAGED ── */
-  --purple:          #C084FC;
-  --purple-dim:      #A855F7;
-  --purple-muted:    #6B21A8;
-  --purple-ghost:    #1A0A2E;
+  /* ── Gold ── */
+  --gold:       #FFD700;
+  --gold-dim:   #FCD34D;
+  --gold-mid:   #D97706;
+  --gold-muted: #78350F;
+  --gold-ghost: #1C1200;
 
-  /* ── Vivid Teal — ACTIVE METRICS ── */
-  --teal:            #2DD4BF;
-  --teal-dim:        #14B8A6;
-  --teal-muted:      #0F766E;
-  --teal-ghost:      #042A27;
+  /* ── Purple — planned states ── */
+  --purple:       #C084FC;
+  --purple-dim:   #A855F7;
+  --purple-muted: #6B21A8;
+  --purple-ghost: #1A0A2E;
 
-  /* ── Amber — WARNING ONLY ── */
+  /* ── Teal — active states ── */
+  --teal:       #2DD4BF;
+  --teal-dim:   #14B8A6;
+  --teal-muted: #0F766E;
+  --teal-ghost: #042A27;
+
+  /* ── Amber — warning only ── */
   --amber:       #F59E0B;
   --amber-dim:   #B45309;
   --amber-ghost: #1C1000;
 
   /* ── Alert ── */
-  --alert:       #FF4444;
-  --alert-dim:   #DC2626;
-  --alert-bg:    rgba(255,68,68,0.08);
+  --alert:    #FF4444;
+  --alert-dim:#DC2626;
+  --alert-bg: rgba(255,68,68,0.08);
 
-  /* ── Text — FIXED contrast for dark bg ── */
-  --text-primary:   #E2F5E2;   /* bright white-green — Level 1 */
-  --text-secondary: #86EFAC;   /* readable green — Level 2 */
-  --text-muted:     #6DAA6D;   /* visible olive-green — Level 3 FIXED */
-  --text-dim:       #4A7A4A;   /* subtle — reference only */
-  --text-ghost:     #2A4A2A;   /* near-invisible — watermarks */
-
-  /* ── Glows ── */
-  --glow-phosphor:  0 0 8px rgba(57,255,20,0.5),   0 0 20px rgba(57,255,20,0.15);
-  --glow-electric:  0 0 8px rgba(0,229,255,0.5),   0 0 20px rgba(0,229,255,0.15);
-  --glow-gold:      0 0 8px rgba(255,215,0,0.5),   0 0 20px rgba(255,215,0,0.15);
-  --glow-purple:    0 0 8px rgba(192,132,252,0.5), 0 0 20px rgba(192,132,252,0.15);
-  --glow-teal:      0 0 8px rgba(45,212,191,0.5),  0 0 20px rgba(45,212,191,0.15);
-  --glow-amber:     0 0 8px rgba(245,158,11,0.5),  0 0 20px rgba(245,158,11,0.15);
-  --glow-alert:     0 0 8px rgba(255,68,68,0.5),   0 0 20px rgba(255,68,68,0.15);
-
-  /* ── Typography ── */
-  --font-terminal: 'Share Tech Mono', 'Courier New', monospace;
-  --font-data:     'JetBrains Mono', 'Fira Code', monospace;
-
-  /* ── Type Scale ── */
-  --text-xs:   10px;
-  --text-sm:   12px;
-  --text-base: 13px;
-  --text-md:   14px;
-  --text-lg:   16px;
-  --text-xl:   20px;
-  --text-2xl:  28px;
-  --text-3xl:  36px;
-
-  /* ── Spacing ── */
-  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px;
-  --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-8: 32px;
-
-  /* ── Layout ── */
-  --topbar-h:  48px;
-  --kpi-h:     88px;
-  --toolbar-h: 44px;
-  --sidebar-w: 224px;
-  --row-h:     32px;
-  --header-h:  40px;
-  --radius:    3px;
+  /* ── TEXT — dark mode, all levels visible ── */
+  --text-primary:   #E2F5E2;   /* L1 — bright */
+  --text-secondary: #86EFAC;   /* L2 — readable */
+  --text-muted:     #6DAA6D;   /* L3 — FIXED: visible on dark */
+  --text-dim:       #4A7A4A;   /* L4 — subtle */
+  --text-ghost:     #2A4A2A;   /* L5 — watermark */
 
   /* ── Borders ── */
-  --border:          1px solid var(--bg-3);
+  --border:          1px solid #1A2614;
   --border-lit:      1px solid var(--phosphor-muted);
   --border-electric: 1px solid var(--electric-muted);
   --border-gold:     1px solid var(--gold-mid);
@@ -110,153 +82,135 @@
   --border-purple:   1px solid var(--purple-muted);
   --border-teal:     1px solid var(--teal-muted);
 
+  /* ── Glows ── */
+  --glow-phosphor: 0 0 8px rgba(57,255,20,0.5),   0 0 20px rgba(57,255,20,0.15);
+  --glow-electric: 0 0 8px rgba(0,229,255,0.5),   0 0 20px rgba(0,229,255,0.15);
+  --glow-gold:     0 0 8px rgba(255,215,0,0.5),   0 0 20px rgba(255,215,0,0.15);
+  --glow-purple:   0 0 8px rgba(192,132,252,0.5), 0 0 20px rgba(192,132,252,0.15);
+  --glow-teal:     0 0 8px rgba(45,212,191,0.5),  0 0 20px rgba(45,212,191,0.15);
+  --glow-amber:    0 0 8px rgba(245,158,11,0.5),  0 0 20px rgba(245,158,11,0.15);
+  --glow-alert:    0 0 8px rgba(255,68,68,0.5),   0 0 20px rgba(255,68,68,0.15);
+
+  /* ── Typography ── */
+  --font-terminal: 'Share Tech Mono', 'Courier New', monospace;
+  --font-data:     'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Type Scale ── */
+  --text-xs:   10px; --text-sm:  12px; --text-base: 13px;
+  --text-md:   14px; --text-lg:  16px; --text-xl:   20px;
+  --text-2xl:  28px; --text-3xl: 36px;
+
+  /* ── Spacing ── */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px;
+  --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px;
+
+  /* ── Layout ── */
+  --topbar-h:  48px; --kpi-h: 88px; --toolbar-h: 44px;
+  --sidebar-w: 224px; --row-h: 32px; --header-h: 40px; --radius: 3px;
+
   /* ── Transitions ── */
-  --t-fast:   80ms ease;
-  --t-normal: 150ms ease;
-  --t-slow:   300ms ease;
+  --t-fast:80ms ease; --t-normal:150ms ease; --t-slow:300ms ease;
 }
 
 /* ── Reset ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
-html, body {
-  height: 100%;
-  overflow: hidden;
-  background: var(--bg-0);
-  color: var(--text-primary);
-  font-family: var(--font-terminal);
-  font-size: var(--text-base);
-  line-height: 1.4;
-  -webkit-font-smoothing: antialiased;
+html,body{
+  height:100%; overflow:hidden;
+  background:var(--zone-grid);
+  color:var(--text-primary);
+  font-family:var(--font-terminal);
+  font-size:var(--text-base);
+  line-height:1.4;
+  -webkit-font-smoothing:antialiased;
 }
 
-/* ── SCANLINE — pure CSS ── */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg, transparent, transparent 2px,
-    rgba(0,0,0,0.10) 2px, rgba(0,0,0,0.10) 4px
-  );
-  pointer-events: none;
-  z-index: 9999;
+/* ── SCANLINE ── */
+body::after{
+  content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.10) 2px,rgba(0,0,0,0.10) 4px);
+  pointer-events:none;z-index:9999;
 }
 
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: var(--bg-0); }
-::-webkit-scrollbar-thumb { background: var(--phosphor-muted); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--phosphor-mid); }
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:var(--bg-0);}
+::-webkit-scrollbar-thumb{background:var(--phosphor-muted);border-radius:2px;}
+::selection{background:rgba(57,255,20,0.2);color:var(--text-primary);}
 
-::selection { background: rgba(57,255,20,0.2); color: var(--text-primary); }
-
-/* ══ LIGHT MODE ══ */
+/* ══════════════════════════════════════
+   LIGHT MODE
+══════════════════════════════════════ */
 body.light-mode {
-  --bg-0:       #F5F9F5;
-  --bg-1:       #EBF3EB;
-  --bg-2:       #DCE9DC;
-  --bg-3:       #C4D9C4;
-  --bg-4:       #A8C4A8;
-  --bg-5:       #8CAF8C;
+  /* ── ZONE BACKGROUNDS — light mode ── */
+  --zone-topbar:  #D8EDD8;   /* cool mint — command */
+  --zone-sidebar: #DFF2DF;   /* lighter mint — navigation */
+  --zone-metrics: #E8F7E8;   /* very light — data readout */
+  --zone-toolbar: #E2F2E2;   /* action level */
+  --zone-grid:    #F0F9F0;   /* lightest — content */
+  --zone-header:  #D4EDD4;   /* column headers */
 
-  --phosphor:        #1A6B1A;
-  --phosphor-dim:    #226622;
-  --phosphor-mid:    #2E862E;
-  --phosphor-muted:  #3A963A;
-  --phosphor-ghost:  rgba(26,107,26,0.12);
+  --bg-0: #F0F9F0;
+  --bg-1: #E8F5E8;
+  --bg-2: #DCEDDC;
+  --bg-3: #C8DEC8;
+  --bg-4: #AECFAE;
+  --bg-5: #94BA94;
 
-  --electric:        #0066AA;
-  --electric-dim:    #0077BB;
-  --electric-muted:  #4488AA;
-  --electric-ghost:  rgba(0,102,170,0.1);
+  --phosphor:       #1A6B1A;
+  --phosphor-dim:   #226622;
+  --phosphor-mid:   #2E862E;
+  --phosphor-muted: #3A963A;
+  --phosphor-ghost: rgba(26,107,26,0.12);
 
-  --gold:            #996600;
-  --gold-dim:        #AA7700;
-  --gold-mid:        #BB8800;
-  --gold-ghost:      rgba(153,102,0,0.1);
+  --electric:       #0066AA;
+  --electric-dim:   #0077BB;
+  --electric-muted: #4488AA;
+  --electric-ghost: rgba(0,102,170,0.1);
 
-  --purple:          #7C3AED;
-  --purple-dim:      #8B5CF6;
-  --purple-muted:    #5B21B6;
-  --purple-ghost:    rgba(124,58,237,0.1);
+  --gold:       #886600;
+  --gold-dim:   #997700;
+  --gold-mid:   #AA8800;
+  --gold-ghost: rgba(136,102,0,0.1);
 
-  --teal:            #0D9488;
-  --teal-dim:        #14B8A6;
-  --teal-muted:      #0F766E;
-  --teal-ghost:      rgba(13,148,136,0.1);
+  --purple:       #6D28D9;
+  --purple-dim:   #7C3AED;
+  --purple-muted: #5B21B6;
+  --purple-ghost: rgba(109,40,217,0.1);
+
+  --teal:       #0D9488;
+  --teal-dim:   #14B8A6;
+  --teal-muted: #0F766E;
+  --teal-ghost: rgba(13,148,136,0.1);
 
   --amber:       #B45309;
   --amber-dim:   #92400E;
   --amber-ghost: rgba(180,83,9,0.1);
 
-  --alert:       #CC2222;
-  --alert-dim:   #AA1111;
-  --alert-bg:    rgba(204,34,34,0.08);
+  --alert:    #CC2222;
+  --alert-dim:#AA1111;
+  --alert-bg: rgba(204,34,34,0.08);
 
-  /* LIGHT MODE TEXT — high contrast on light bg */
-  --text-primary:   #0F1F0F;   /* near-black green */
-  --text-secondary: #1E4A1E;   /* dark green */
-  --text-muted:     #3A6A3A;   /* medium green — VISIBLE on light bg */
-  --text-dim:       #6A9A6A;   /* lighter — still readable */
-  --text-ghost:     #9AC49A;   /* subtle */
+  /* ── TEXT — light mode, all levels visible ── */
+  --text-primary:   #0A1F0A;   /* near-black — L1 */
+  --text-secondary: #1A3D1A;   /* dark green — L2 */
+  --text-muted:     #2E5E2E;   /* medium — L3 VISIBLE */
+  --text-dim:       #5A8A5A;   /* subtle — L4 */
+  --text-ghost:     #8AB88A;   /* very subtle — L5 */
 
-  --glow-phosphor:  none;
-  --glow-electric:  none;
-  --glow-gold:      none;
-  --glow-purple:    none;
-  --glow-teal:      none;
-  --glow-amber:     none;
-  --glow-alert:     none;
+  --border: 1px solid #C8DEC8;
+  --border-lit: 1px solid var(--phosphor-muted);
+  --glow-phosphor: none;
+  --glow-electric: none;
+  --glow-gold:     none;
+  --glow-purple:   none;
+  --glow-teal:     none;
+  --glow-amber:    none;
+  --glow-alert:    none;
 }
 
 body.light-mode::after { display: none; }
 
-body.light-mode #topbar {
-  background: var(--bg-1);
-  border-bottom: 1px solid var(--bg-3);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-
-body.light-mode #sidebar {
-  background: var(--bg-1);
-  border-right: 1px solid var(--bg-3);
-}
-
-body.light-mode .kpi-card { background: var(--bg-1); }
-body.light-mode #kpi-strip { background: var(--bg-3); }
-
-body.light-mode #grid-header th {
-  background: var(--bg-2) !important;
-  color: var(--text-muted) !important;
-}
-body.light-mode #grid-header-wrap { background: var(--bg-2); border-bottom-color: var(--phosphor-muted); }
-body.light-mode #grid-body tr.row-even { background: var(--bg-0); }
-body.light-mode #grid-body tr.row-odd  { background: var(--bg-1); }
-body.light-mode #grid-body tr:hover    { background: var(--bg-2) !important; }
-body.light-mode #grid-body td { color: var(--text-secondary) !important; }
-body.light-mode td.cell-currency { color: var(--gold-dim) !important; }
-body.light-mode td.cell-pct.pct-positive { color: var(--electric-dim) !important; }
-
-body.light-mode #toolbar { background: var(--bg-1); border-bottom: 1px solid var(--bg-3); }
-body.light-mode #search-input { background: var(--bg-0); color: var(--text-primary); border-color: var(--bg-3); }
-body.light-mode #search-input::placeholder { color: var(--text-dim) !important; }
-body.light-mode .filter-select { background-color: var(--bg-0); color: var(--text-primary); border-color: var(--bg-3); }
-body.light-mode .filter-select option { background: var(--bg-1); color: var(--text-primary); }
-body.light-mode .btn-clear-filters { color: var(--text-secondary) !important; }
-body.light-mode .panel-toggle-label { color: var(--text-primary) !important; }
-body.light-mode .sector-title { color: var(--text-muted) !important; }
-body.light-mode .sort-none-text { color: var(--text-muted) !important; }
-body.light-mode .toolbar-count { color: var(--text-secondary) !important; }
-body.light-mode #clock { color: var(--text-secondary) !important; }
-body.light-mode .topbar-stat-value { color: var(--text-secondary) !important; }
-body.light-mode .signal-status { color: var(--phosphor) !important; }
-body.light-mode .signal-wrap.live .signal-bar { background: var(--phosphor-dim) !important; box-shadow: none !important; }
-body.light-mode #btn-pause { color: var(--phosphor); border-color: var(--phosphor-muted); background: var(--phosphor-ghost); }
-body.light-mode #btn-pause:hover { background: rgba(26,107,26,0.15); }
-body.light-mode .sidebar-footer-text { color: var(--text-dim) !important; }
-
-/* ── Vivid badge updates ── */
+/* Badge overrides for both modes */
 .badge-planned {
   background: var(--purple-ghost) !important;
   color: var(--purple) !important;
