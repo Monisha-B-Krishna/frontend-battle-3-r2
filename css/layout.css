@@ -257,6 +257,8 @@
   margin-bottom: var(--sp-3);
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: var(--sp-2);
   text-transform: uppercase;
   padding-bottom: var(--sp-2);
