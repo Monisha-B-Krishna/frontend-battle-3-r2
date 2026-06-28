@@ -1,6 +1,6 @@
 /* ============================================================
    OVERMIND — Layout System
-   Command Center Architecture
+   Visual Hierarchy Pass — 3 levels of emphasis
    ============================================================ */
 
 /* ── App Shell ── */
@@ -30,15 +30,13 @@
   position: relative;
 }
 
-/* Subtle top glow line */
 #topbar::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: var(--phosphor);
-  opacity: 0.4;
-  box-shadow: var(--glow-phosphor);
+  background: linear-gradient(90deg, var(--phosphor), var(--electric), var(--gold));
+  opacity: 0.6;
 }
 
 .topbar-left {
@@ -48,7 +46,7 @@
   flex-shrink: 0;
 }
 
-/* ── Brand ── */
+/* ── Brand — Level 1 ── */
 .brand {
   display: flex;
   align-items: center;
@@ -63,29 +61,29 @@
 
 .brand-name {
   font-family: var(--font-terminal);
-  font-size: 18px;
+  font-size: 20px;
   color: var(--phosphor);
   letter-spacing: 0.2em;
   text-shadow: var(--glow-phosphor);
+  font-weight: bold;
 }
 
 .brand-version {
   font-family: var(--font-data);
   font-size: 9px;
-  color: var(--text-primary);
+  color: var(--text-muted);
   letter-spacing: 0.1em;
   align-self: flex-end;
   margin-bottom: 2px;
 }
 
 .topbar-sep {
-  font-family: var(--font-terminal);
   color: var(--bg-4);
   font-size: var(--text-lg);
   flex-shrink: 0;
 }
 
-/* ── Signal Strength Indicator ── */
+/* ── Signal Strength ── */
 .signal-wrap {
   display: flex;
   align-items: flex-end;
@@ -99,7 +97,7 @@
 .signal-label {
   font-family: var(--font-terminal);
   font-size: 9px;
-  color: var(--text-primary);
+  color: var(--text-muted);
   letter-spacing: 0.12em;
   margin-right: var(--sp-1);
   align-self: center;
@@ -109,7 +107,7 @@
   width: 4px;
   border-radius: 1px;
   background: var(--bg-4);
-  transition: background var(--t-normal), box-shadow var(--t-normal);
+  transition: background var(--t-normal);
 }
 
 .signal-bar:nth-child(2) { height: 6px; }
@@ -140,11 +138,12 @@
   letter-spacing: 0.1em;
   margin-left: var(--sp-2);
   align-self: center;
+  font-weight: bold;
 }
 
 .signal-status.paused { color: var(--amber); }
 
-/* Topbar center */
+/* Topbar center — Level 3 (reference info) */
 .topbar-center {
   display: flex;
   align-items: center;
@@ -162,7 +161,7 @@
 
 .topbar-stat-label {
   font-size: 9px;
-  color: var(--text-primary);
+  color: var(--text-muted);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -171,7 +170,7 @@
   font-family: var(--font-data);
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--phosphor-dim);
+  color: var(--text-secondary);
 }
 
 .topbar-right {
@@ -181,16 +180,16 @@
   flex-shrink: 0;
 }
 
-/* ── Command Buttons ── */
+/* ── Freeze/Resume Button — Level 1 action ── */
 #btn-pause {
   display: flex;
   align-items: center;
   gap: var(--sp-2);
   padding: 0 var(--sp-4);
-  height: 30px;
-  background: transparent;
+  height: 32px;
+  background: var(--phosphor-ghost);
   color: var(--phosphor);
-  border: var(--border-lit);
+  border: 1px solid var(--phosphor-dim);
   border-radius: var(--radius);
   font-family: var(--font-terminal);
   font-size: var(--text-sm);
@@ -198,28 +197,27 @@
   cursor: pointer;
   transition: all var(--t-fast);
   text-transform: uppercase;
+  font-weight: bold;
 }
 
 #btn-pause:hover {
-  background: var(--phosphor-ghost);
+  background: rgba(57,255,20,0.15);
   box-shadow: var(--glow-phosphor);
-  color: var(--phosphor);
 }
 
 #btn-pause.paused {
-  border-color: var(--amber-dim);
+  background: var(--amber-ghost);
+  border-color: var(--amber);
   color: var(--amber);
 }
 
-/* amber hover correct for warning state */
 #btn-pause.paused:hover {
-  background: var(--amber-ghost);
+  background: rgba(245,158,11,0.15);
   box-shadow: var(--glow-amber);
 }
 
 #btn-pause svg {
-  width: 11px;
-  height: 11px;
+  width: 11px; height: 11px;
   fill: currentColor;
   flex-shrink: 0;
 }
@@ -227,7 +225,7 @@
 #clock {
   font-family: var(--font-data);
   font-size: var(--text-sm);
-  color: var(--text-primary);
+  color: var(--text-secondary);
   letter-spacing: 0.06em;
   min-width: 68px;
   text-align: right;
@@ -237,27 +235,32 @@
 #sidebar {
   grid-area: sidebar;
   background: var(--bg-1);
-  border-right: 1px solid var(--phosphor-muted);
+  border-right: 1px solid var(--bg-3);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
+/* Sidebar sections — visual separation */
 .sidebar-sector {
   padding: var(--sp-3) var(--sp-4);
-  border-bottom: var(--border);
+  border-bottom: 1px solid var(--bg-3);
 }
 
+/* Section title — Level 3 (small, dim label) */
 .sector-title {
   font-family: var(--font-terminal);
   font-size: 9px;
-  color: var(--phosphor-muted);
+  color: var(--text-muted);
   letter-spacing: 0.2em;
   margin-bottom: var(--sp-3);
   display: flex;
   align-items: center;
   gap: var(--sp-2);
+  text-transform: uppercase;
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--bg-3);
 }
 
 .sector-title::before {
@@ -266,12 +269,12 @@
   font-size: 8px;
 }
 
-/* Panel Toggles */
+/* Panel Toggles — Level 2 */
 .panel-toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--sp-2);
+  padding: var(--sp-2) var(--sp-2);
   border-radius: var(--radius);
   cursor: pointer;
   transition: background var(--t-fast);
@@ -283,23 +286,22 @@
 
 .panel-toggle-label {
   font-family: var(--font-terminal);
-  font-size: var(--text-sm);
+  font-size: 13px;
   color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: var(--sp-2);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
 }
 
 .panel-toggle-label .sector-icon {
   font-size: 10px;
-  color: var(--phosphor-muted);
+  color: var(--phosphor);
 }
 
-/* Toggle Switch — military style */
+/* Toggle Switch */
 .toggle-switch {
-  width: 28px;
-  height: 14px;
+  width: 28px; height: 14px;
   background: var(--bg-3);
   border: 1px solid var(--bg-4);
   border-radius: 2px;
@@ -311,10 +313,8 @@
 .toggle-switch::after {
   content: '';
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 8px;
-  height: 8px;
+  top: 2px; left: 2px;
+  width: 8px; height: 8px;
   background: var(--text-muted);
   border-radius: 1px;
   transition: transform var(--t-normal), background var(--t-normal);
@@ -331,15 +331,15 @@
   box-shadow: 0 0 4px var(--phosphor);
 }
 
-/* Filter Controls */
+/* ── Filter Controls — Level 2 ── */
 .filter-group {
   margin-bottom: var(--sp-3);
 }
 
 .filter-label {
   font-family: var(--font-terminal);
-  font-size: 9px;
-  color: var(--text-primary);
+  font-size: 10px;
+  color: var(--text-muted);
   letter-spacing: 0.15em;
   margin-bottom: var(--sp-1);
   display: block;
@@ -348,23 +348,22 @@
 
 .filter-select {
   width: 100%;
-  height: 28px;
-  background: var(--bg-2);
-  border: var(--border);
+  height: 30px;
+  background: var(--bg-0);
+  border: 1px solid var(--bg-4);
   border-radius: var(--radius);
   color: var(--text-primary);
   font-family: var(--font-terminal);
-  font-size: var(--text-sm);
+  font-size: 12px;
   padding: 0 var(--sp-2);
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M1 1l3 3 3-3' stroke='%234B5320' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M1 1l3 3 3-3' stroke='%2386EFAC' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 8px center;
   padding-right: 22px;
   transition: border-color var(--t-fast);
-  letter-spacing: 0.04em;
 }
 
 .filter-select:focus {
@@ -379,14 +378,14 @@
 
 .btn-clear-filters {
   width: 100%;
-  height: 26px;
+  height: 28px;
   background: transparent;
-  border: var(--border);
+  border: 1px solid var(--bg-4);
   border-radius: var(--radius);
-  color: var(--text-primary);
+  color: var(--text-secondary);
   font-family: var(--font-terminal);
-  font-size: var(--text-xs);
-  letter-spacing: 0.12em;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   cursor: pointer;
   transition: all var(--t-fast);
   text-transform: uppercase;
@@ -396,19 +395,20 @@
 .btn-clear-filters:hover {
   border-color: var(--alert-dim);
   color: var(--alert);
+  background: var(--alert-bg);
 }
 
 /* Sidebar Footer */
 .sidebar-footer {
   margin-top: auto;
   padding: var(--sp-3) var(--sp-4);
-  border-top: var(--border);
+  border-top: 1px solid var(--bg-3);
 }
 
 .sidebar-footer-text {
   font-family: var(--font-terminal);
   font-size: 9px;
-  color: var(--text-dim);
+  color: var(--text-muted);
   line-height: 1.8;
   letter-spacing: 0.08em;
 }
@@ -426,13 +426,13 @@
   background: var(--bg-0);
 }
 
-/* ── KPI STRIP ── */
+/* ── KPI STRIP — distinct background ── */
 #kpi-strip {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--bg-3);
-  border-bottom: 1px solid var(--phosphor-muted);
+  border-bottom: 2px solid var(--bg-3);
   height: var(--kpi-h);
   flex-shrink: 0;
 }
@@ -445,7 +445,7 @@
   padding: 0 var(--sp-4);
   height: var(--toolbar-h);
   background: var(--bg-1);
-  border-bottom: var(--border);
+  border-bottom: 1px solid var(--bg-3);
   flex-shrink: 0;
 }
 
@@ -458,7 +458,6 @@
   position: relative;
 }
 
-/* Hidden panels */
 .panel-hidden { display: none !important; }
 
 /* ── Buffer indicator ── */
@@ -468,7 +467,7 @@
   top: var(--sp-3);
   right: var(--sp-4);
   background: var(--amber-ghost);
-  border: var(--border-amber);
+  border: 1px solid var(--amber-dim);
   border-radius: var(--radius);
   padding: var(--sp-1) var(--sp-3);
   font-family: var(--font-terminal);
@@ -483,66 +482,4 @@
   display: flex;
   align-items: center;
   gap: var(--sp-2);
-}
-
-/* ══ VISIBILITY FIX — sidebar text contrast ══ */
-.sector-title {
-  color: var(--phosphor-dim) !important;
-  font-size: 10px !important;
-}
-
-.panel-toggle-label {
-  color: var(--text-primary) !important;
-}
-
-.filter-label {
-  color: var(--text-secondary) !important;
-  font-size: 11px !important;
-}
-
-.filter-select {
-  color: var(--text-primary) !important;
-  font-size: 12px !important;
-}
-
-.filter-select option {
-  color: var(--text-primary) !important;
-  background: var(--bg-1) !important;
-}
-
-.btn-clear-filters {
-  color: var(--text-secondary) !important;
-  border-color: var(--bg-4) !important;
-  font-size: 11px !important;
-}
-
-.btn-clear-filters:hover {
-  color: var(--alert) !important;
-  border-color: var(--alert-dim) !important;
-}
-
-.sort-none-text {
-  color: var(--text-secondary) !important;
-  font-size: 11px !important;
-  line-height: 1.8 !important;
-}
-
-.sidebar-footer-text {
-  color: var(--text-muted) !important;
-  font-size: 10px !important;
-}
-
-.sidebar-footer-text .callsign {
-  color: var(--phosphor-muted) !important;
-}
-
-/* Clock brighter */
-#clock {
-  color: var(--text-secondary) !important;
-}
-
-/* Topbar stat labels brighter */
-.topbar-stat-label {
-  color: var(--text-secondary) !important;
-  font-size: 10px !important;
 }

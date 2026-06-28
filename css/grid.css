@@ -1,6 +1,6 @@
 /* ============================================================
    OVERMIND — Grid Styles
-   High-density field data terminal
+   Visual Hierarchy: Headers Level 2, Data Level 3
    ============================================================ */
 
 #grid-panel {
@@ -26,12 +26,12 @@
   position: relative;
 }
 
-/* ── Header ── */
+/* ── Header — visually distinct zone ── */
 #grid-header-wrap {
   overflow: hidden;
   flex-shrink: 0;
-  background: var(--bg-1);
-  border-bottom: 1px solid var(--phosphor-muted);
+  background: var(--bg-2);
+  border-bottom: 2px solid var(--phosphor-muted);
 }
 
 #grid-header {
@@ -44,9 +44,10 @@
   height: var(--header-h);
   padding: 0 var(--sp-2);
   font-family: var(--font-terminal);
-  font-size: 10px;
-  color: var(--text-muted);
-  letter-spacing: 0.12em;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
@@ -54,6 +55,7 @@
   border-right: 1px solid var(--bg-3);
   user-select: none;
   text-transform: uppercase;
+  background: var(--bg-2);
 }
 
 #grid-header th:last-child { border-right: none; }
@@ -64,24 +66,39 @@
 }
 
 #grid-header th.sortable:hover {
-  color: var(--text-secondary);
-  background: var(--bg-2);
+  color: var(--phosphor);
+  background: var(--bg-3);
 }
 
 #grid-header th.sort-active {
-  color: var(--phosphor-dim);
+  color: var(--phosphor);
   background: var(--phosphor-ghost);
+  border-bottom: 2px solid var(--phosphor);
 }
 
 #grid-header th.sort-active-multi {
-  color: var(--amber);
-  background: var(--amber-ghost);
+  color: var(--gold);
+  background: var(--gold-ghost);
+  border-bottom: 2px solid var(--gold);
 }
 
 .th-inner {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+/* Sortable column hint */
+#grid-header th.sortable .th-inner::after {
+  content: '⇅';
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+
+#grid-header th.sort-active .th-inner::after,
+#grid-header th.sort-active-multi .th-inner::after {
+  display: none;
 }
 
 /* Sort icons */
@@ -93,7 +110,6 @@
   transition: opacity var(--t-fast);
 }
 
-th.sortable:hover .sort-icon { opacity: 0.5; }
 th.sort-active .sort-icon,
 th.sort-active-multi .sort-icon { opacity: 1; }
 
@@ -110,7 +126,7 @@ th.sort-desc .sort-icon-up   { opacity: 0.3; }
 th.sort-desc .sort-icon-down { opacity: 1; }
 
 /* ── Column Widths ── */
-.col-num     { width: 44px; }
+.col-num     { width: 40px; }
 .col-pid     { width: 96px; }
 .col-cid     { width: 96px; }
 .col-name    { width: 200px; }
@@ -130,12 +146,11 @@ th.sort-desc .sort-icon-down { opacity: 1; }
 #virtual-spacer-top,
 #virtual-spacer-bottom { display: block; }
 
-/* ── Data Rows ── */
+/* ── Data Rows — Level 3 (readable but not competing) ── */
 #grid-body tr {
   height: var(--row-h);
-  border-bottom: 1px solid rgba(26,38,20,0.8);
+  border-bottom: 1px solid rgba(26,38,20,0.6);
   transition: background var(--t-fast);
-  will-change: contents;
 }
 
 #grid-body tr.row-even { background: var(--bg-0); }
@@ -143,25 +158,25 @@ th.sort-desc .sort-icon-down { opacity: 1; }
 
 #grid-body tr:hover {
   background: var(--bg-2) !important;
-  border-left: 2px solid var(--phosphor-muted);
+  border-left: 2px solid var(--phosphor);
 }
 
 #grid-body td {
   padding: 0 var(--sp-2);
   font-family: var(--font-terminal);
-  font-size: var(--text-base);
+  font-size: 12px;
   color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-right: 1px solid rgba(26,38,20,0.6);
+  border-right: 1px solid rgba(26,38,20,0.4);
   height: var(--row-h);
   vertical-align: middle;
 }
 
 #grid-body td:last-child { border-right: none; }
 
-/* Numeric cells */
+/* Numeric cells — Level 2 (important data, stands out) */
 td.cell-currency,
 td.cell-pct,
 td.cell-int {
@@ -172,34 +187,36 @@ td.cell-int {
   color: var(--text-primary);
 }
 
+/* Currency = gold (money colour) */
 td.cell-currency { color: var(--gold-dim); }
 
+/* ROI positive = cyan, negative = red */
 td.cell-pct.pct-positive { color: var(--electric-dim); }
-td.cell-pct.pct-negative { color: var(--alert); }
+td.cell-pct.pct-negative { color: var(--alert); font-weight: bold; }
 
+/* IDs — Level 3 (reference only) */
 td.cell-id {
   font-family: var(--font-data);
   font-size: 11px;
   color: var(--text-muted);
-  letter-spacing: 0.02em;
 }
 
 td.cell-row-num {
   font-family: var(--font-data);
   font-size: 10px;
-  color: var(--text-dim);
+  color: var(--text-muted);
   text-align: right;
   padding-right: var(--sp-2);
   border-right: 1px solid var(--bg-3);
 }
 
-/* ── Alert Flash — ANOMALY DETECTED ── */
+/* ── Alert Flash — ANOMALY ── */
 @keyframes anomaly-flash {
   0%   { background-color: rgba(255,68,68,0.00); }
-  15%  { background-color: rgba(255,68,68,0.22); }
-  35%  { background-color: rgba(255,68,68,0.04); }
-  55%  { background-color: rgba(255,68,68,0.18); }
-  75%  { background-color: rgba(255,68,68,0.04); }
+  15%  { background-color: rgba(255,68,68,0.25); }
+  35%  { background-color: rgba(255,68,68,0.05); }
+  55%  { background-color: rgba(255,68,68,0.20); }
+  75%  { background-color: rgba(255,68,68,0.05); }
   100% { background-color: rgba(255,68,68,0.00); }
 }
 
@@ -217,39 +234,4 @@ td.cell-row-num {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-}
-
-/* ══ VISIBILITY FIX — column headers and grid text ══ */
-
-/* Column headers — readable */
-#grid-header th {
-  color: var(--text-secondary) !important;
-  font-size: 11px !important;
-}
-
-#grid-header th.sortable:hover {
-  color: var(--text-primary) !important;
-}
-
-#grid-header th.sort-active {
-  color: var(--phosphor-dim) !important;
-}
-
-#grid-header th.sort-active-multi {
-  color: var(--gold-dim) !important;
-}
-
-/* Grid body text — readable */
-#grid-body td {
-  color: var(--text-secondary) !important;
-}
-
-/* ID cells */
-td.cell-id {
-  color: var(--text-muted) !important;
-}
-
-/* Row number */
-td.cell-row-num {
-  color: var(--text-muted) !important;
 }

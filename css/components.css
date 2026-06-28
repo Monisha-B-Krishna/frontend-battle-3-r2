@@ -412,3 +412,66 @@
 .kpi-sub {
   color: var(--text-secondary) !important;
 }
+
+/* ══ HIERARCHY FIX — KPI, toolbar, search ══ */
+
+/* KPI label — Level 3 (small, dim, just a tag) */
+.kpi-label {
+  font-size: 10px !important;
+  color: var(--text-muted) !important;
+  letter-spacing: 0.12em !important;
+}
+
+/* KPI value — Level 1 (BIG, bright, first thing you see) */
+.kpi-value {
+  font-size: 32px !important;
+  line-height: 1 !important;
+}
+
+/* KPI sub — Level 3 */
+.kpi-sub {
+  font-size: 10px !important;
+  color: var(--text-muted) !important;
+}
+
+.kpi-live-dot {
+  background: var(--phosphor) !important;
+}
+
+/* Toolbar search — visible */
+#search-input {
+  border-color: var(--bg-4) !important;
+  background: var(--bg-0) !important;
+}
+
+#search-input:focus {
+  border-color: var(--phosphor-muted) !important;
+}
+
+#search-input::placeholder {
+  color: var(--text-muted) !important;
+  font-size: 11px !important;
+}
+
+.search-prefix {
+  color: var(--phosphor) !important;
+}
+
+/* Row count — clear label */
+.toolbar-count {
+  color: var(--text-secondary) !important;
+  background: var(--bg-0) !important;
+  border-color: var(--bg-3) !important;
+  font-size: 11px !important;
+}
+
+.toolbar-count span {
+  color: var(--phosphor-dim) !important;
+}
+
+/* Sort tags */
+.sort-none-text {
+  color: var(--text-muted) !important;
+  font-size: 10px !important;
+  line-height: 1.9 !important;
+}
