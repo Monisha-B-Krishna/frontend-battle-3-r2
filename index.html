@@ -12,11 +12,18 @@
 </head>
 <body>
   <div id="app">
-    <!-- OVERMIND Command Center — building in phases -->
     <p style="color:#39FF14;font-family:monospace;padding:20px;">
-      OVERMIND INITIALIZING...
+      OVERMIND — Stream connecting...
     </p>
   </div>
   <script src="./dataStream.js"></script>
+  <script src="./js/format.js"></script>
+  <script src="./js/state.js"></script>
+  <script src="./js/stream.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      Stream.init();
+    });
+  </script>
 </body>
 </html>
