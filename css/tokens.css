@@ -83,8 +83,8 @@
 
   /* ── Type Scale ── */
   --text-xs:   10px;
-  --text-sm:   12px;
-  --text-base: 13px;
+  --text-sm:   13px;
+  --text-base: 14px;
   --text-md:   14px;
   --text-lg:   16px;
   --text-xl:   20px;
@@ -105,7 +105,7 @@
   --kpi-h:     88px;
   --toolbar-h: 44px;
   --sidebar-w: 224px;
-  --row-h:     28px;
+  --row-h:     32px;
   --header-h:  40px;
   --radius:    3px;
 
